@@ -69,6 +69,7 @@ student_id int not null,
 teacher_id int not null,
 subject_id int not null,
 mark int not null,
+date datetime not null,
 constraint marks_1_fk foreign key (subject_id)
 references subjects (subject_id),
 constraint marks_2_fk foreign key (teacher_id)
