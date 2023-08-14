@@ -4,8 +4,8 @@ drop table teachers_classes;
 drop table homeworks;
 drop table marks;
 drop table reproofs;
-drop table students;
 drop table teachers;
+drop table students;
 drop table classes;
 drop table subjects;
 
@@ -21,7 +21,7 @@ subject_name varchar(20) not null);
 create table teachers (
 teacher_id int primary key auto_increment,
 fio varchar(40) not null,
-mail varchar(20) not null,
+mail varchar(20) not null unique,
 pswd varchar(20) not null,
 personal_info varchar(100) );
 
@@ -42,12 +42,16 @@ constraint teachers_classes_unique unique (class_id, subject_id, teacher_id)
 create table students (
 student_id int  primary key AUTO_INCREMENT , 
 fio varchar(40) not null,
-mail varchar(20) not null,
+mail varchar(20) not null unique,
 pswd varchar(20) not null,
 class_id int not null,
 personal_info varchar(100),
 constraint student_fk foreign key (class_id)
 references classes (class_id));
+
+CREATE UNIQUE INDEX UQ_students_mail ON students (mail);
+
+
 
 create table homeworks (
 homework_id int primary key auto_increment,

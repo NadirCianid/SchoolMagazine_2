@@ -8,6 +8,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.ToolBar;
 import javafx.scene.layout.Pane;
 
+import static Controllers.TestApplication.user;
+
 public class HomePageController {
 
     @FXML
@@ -50,7 +52,12 @@ public class HomePageController {
     private Label userNameLabel;
 
     @FXML
-    private ToolBar userStatusLabel;
+    private Label userStatusLabel;
+
+    public void init(String login) {
+        userStatusLabel.setText(user.getRole().name());
+        userNameLabel.setText(user.getName());
+    }
 
     @FXML
     void grade(ActionEvent event) {
