@@ -1,20 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="45300683-648f-47db-937a-eacff8028b5f" name="Changes" comment="Log In now works. After successful log in user information sets in appropriate labels.">
-      <change afterPath="$PROJECT_DIR$/src/Staff/Assistant.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Staff/SubjectFinalGrade.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Staff/TableType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+    <list default="true" id="45300683-648f-47db-937a-eacff8028b5f" name="Changes" comment="The ShowFinalGrades button now works. I made the reboot button working.">
+      <change afterPath="$PROJECT_DIR$/src/Entities/SubjectGrade.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataBaseInitScrypt.sql" beforeDir="false" afterPath="$PROJECT_DIR$/DataBaseInitScrypt.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/DataContrloller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/DataController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/DataController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/DataController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controllers/HomePageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/HomePageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/LogInController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/LogInController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/TestApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/TestApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Staff/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Staff/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Staff/Assistant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Staff/Assistant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Staff/SubjectFinalGrade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/SubjectFinalGrade.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/fxmls/HomePage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxmls/HomePage.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/план.txt" beforeDir="false" afterPath="$PROJECT_DIR$/план.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,8 +19,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="FxmlFile" />
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -75,12 +69,12 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.test">
-    <configuration name="Staff.Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Staff.Test" />
       <module name="SchoolMagazine_2" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Staff.*" />
+          <option name="PATTERN" value="Entities.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -112,7 +106,7 @@
       <updated>1691677505932</updated>
       <workItem from="1691677509587" duration="1577000" />
       <workItem from="1691680252210" duration="26073000" />
-      <workItem from="1692130000412" duration="11860000" />
+      <workItem from="1692130000412" duration="18016000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit. At this point I created Database.">
       <created>1691677972624</created>
@@ -135,7 +129,14 @@
       <option name="project" value="LOCAL" />
       <updated>1692043850372</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="The ShowFinalGrades button now works. I made the reboot button working.">
+      <created>1692340421658</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1692340421658</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -156,6 +157,22 @@
     <MESSAGE value="Initial commit. At this point I created Database." />
     <MESSAGE value="Added application interface. Added database initialization scrypt." />
     <MESSAGE value="Log In now works. After successful log in user information sets in appropriate labels." />
-    <option name="LAST_COMMIT_MESSAGE" value="Log In now works. After successful log in user information sets in appropriate labels." />
+    <MESSAGE value="The ShowFinalGrades button now works. I made the reboot button working." />
+    <option name="LAST_COMMIT_MESSAGE" value="The ShowFinalGrades button now works. I made the reboot button working." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/Controllers/DataController.java</url>
+          <line>184</line>
+          <properties class="Controllers.DataController" method="getSubjectGrades">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

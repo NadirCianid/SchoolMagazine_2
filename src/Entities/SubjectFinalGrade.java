@@ -1,4 +1,4 @@
-package Staff;
+package Entities;
 
 public class SubjectFinalGrade {
     private static int currentNumber = 0; //счетчик количества текущих оценок

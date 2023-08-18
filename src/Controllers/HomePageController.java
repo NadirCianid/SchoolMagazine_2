@@ -1,6 +1,7 @@
 package Controllers;
 
-import Staff.SubjectFinalGrade;
+import Entities.SubjectFinalGrade;
+import Entities.SubjectGrade;
 import Staff.TableType;
 import Staff.UserRole;
 import javafx.event.ActionEvent;
@@ -19,12 +20,14 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.Objects;
 
 import static Controllers.DataController.*;
 import static Controllers.TestApplication.user;
 import static Staff.Assistant.*;
 import static Staff.TableType.FINAL_GRADES;
+import static Staff.TableType.GRADES;
 
 
 public class HomePageController {
@@ -48,6 +51,22 @@ public class HomePageController {
     private TableColumn<SubjectFinalGrade, Integer> fourthQuarter;
     @FXML
     private TableColumn<SubjectFinalGrade, Integer> finalGrade;
+
+
+    @FXML
+    private TableView<SubjectGrade> gradesTableView;
+
+    @FXML
+    private TableColumn<SubjectGrade, String> gradeTeacher;
+    @FXML
+    private TableColumn<SubjectGrade, String> date;
+    @FXML
+    private TableColumn<SubjectGrade, Integer> gradeMark;
+    @FXML
+    private TableColumn<SubjectGrade, Integer> gradeNumber;
+    @FXML
+    private TableColumn<SubjectGrade, String> student;
+
 
 
     @FXML
@@ -129,7 +148,7 @@ public class HomePageController {
         newPageController.init(user.getName());
         newPageController.setSelectedItems();
 
-        newPageController.rebootTable(FINAL_GRADES);
+        newPageController.rebootTable(currentTableType);
 
     }
 
@@ -187,9 +206,14 @@ public class HomePageController {
     }
 
     @FXML
-    void showGrades(ActionEvent event) {
+    void showGrades(ActionEvent event) throws SQLException {
+        selectedItems = getClassAndSubject();
+        setSelectedItems();
 
+        rebootTable(GRADES);
     }
+
+
 
     @FXML
     void showHomework(ActionEvent event) {
@@ -212,10 +236,7 @@ public class HomePageController {
     private void fillHomeworkTable(String[] selectedItems) {
     }
 
-    private void fillGradesTable(String[] selectedItems) {
-    }
-
-    public void fillFinalGradesTable(String[] selectedItems) throws SQLException {
+    private void fillFinalGradesTable(String[] selectedItems) throws SQLException {
         //Настройка соответсвия столбцов и полей хранимой сущности.
         //Таблица будет хранить итоговые оценки по предмету (объекты SubjectFinalGrade).
         number.setCellValueFactory(new PropertyValueFactory<>("number"));
@@ -231,6 +252,23 @@ public class HomePageController {
         /*После заполнения таблицы необходимо обнулить счетчик в классе SubjectFinalGrade,
         чтобы при следующем заполнении он был равен нулю. */
         SubjectFinalGrade.resetCounter();
+    }
+
+    public void fillGradesTable(String[] selectedItems) throws SQLException {
+        //Настройка соответсвия столбцов и полей хранимой сущности.
+        //Таблица будет хранить  оценки по предмету (объекты SubjectGrade).
+        gradeNumber.setCellValueFactory(new PropertyValueFactory<>("gradeNumber"));
+        student.setCellValueFactory(new PropertyValueFactory<>("student"));
+        date.setCellValueFactory(new PropertyValueFactory<>("date"));
+        gradeTeacher.setCellValueFactory(new PropertyValueFactory<>("gradeTeacher"));
+        gradeMark.setCellValueFactory(new PropertyValueFactory<>("gradeMark"));
+
+
+        gradesTableView.setItems(getSubjectGrades(selectedItems));
+
+        /*После заполнения таблицы необходимо обнулить счетчик в классе SubjectFinalGrade,
+        чтобы при следующем заполнении он был равен нулю. */
+        SubjectGrade.resetCounter();
     }
 }
 

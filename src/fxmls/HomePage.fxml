@@ -34,13 +34,13 @@
                      </children></Pane>
                   <Pane fx:id="gradesPane" prefHeight="478.0" prefWidth="552.0" visible="false">
                      <children>
-                        <TableView layoutX="-3.0" layoutY="-1.0" prefHeight="433.0" prefWidth="558.0">
+                        <TableView fx:id="gradesTableView" layoutX="-3.0" layoutY="-1.0" prefHeight="433.0" prefWidth="558.0">
                           <columns>
-                            <TableColumn prefWidth="28.000000715255737" text="№" />
-                              <TableColumn prefWidth="131.19997787475586" text="Ученик" />
-                            <TableColumn prefWidth="105.60005187988281" text="Дата" />
-                              <TableColumn prefWidth="123.20001220703125" text="Учитель" />
-                              <TableColumn prefWidth="75.20001220703125" text="Балл" />
+                            <TableColumn fx:id="gradeNumber" prefWidth="28.000000715255737" text="№" />
+                              <TableColumn fx:id="student" prefWidth="147.2000389099121" text="Ученик" />
+                            <TableColumn fx:id="date" prefWidth="140.8000030517578" text="Дата" />
+                              <TableColumn fx:id="gradeTeacher" prefWidth="125.60003662109375" text="Учитель" />
+                              <TableColumn fx:id="gradeMark" prefWidth="67.199951171875" text="Балл" />
                           </columns>
                         </TableView>
                      </children></Pane>

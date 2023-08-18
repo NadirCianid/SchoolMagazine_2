@@ -109,6 +109,7 @@ insert into students  (fio, mail, pswd, class_name, personal_info)
 insert into marks (student_id, teacher_id, subject_id, mark, date)
 	values (1, 1, 1, 10, "10.10.2010"), (1,1,1,7,"11.09.2010"), 
     (1, 1, 1, 5, "10.11.2010"), (1,1,1,7,"11.12.2010"),
+    (1, 1, 1, 8, "10.1.2010"), (1,1,1,7,"11.2.2010"),
     (1, 1, 1, 8, "10.1.2010"), (1,1,1,7,"11.2.2010");
 
 insert into marks (student_id, teacher_id, subject_id, mark, date)

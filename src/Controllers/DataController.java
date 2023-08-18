@@ -1,10 +1,14 @@
 package Controllers;
 
-import Staff.SubjectFinalGrade;
+import Entities.SubjectFinalGrade;
+import Entities.SubjectGrade;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class DataController {
@@ -16,10 +20,11 @@ public class DataController {
     private static PreparedStatement selectTeachersFioPS;
     private static PreparedStatement selectStudentsFioPS;
 
-    private static Statement selectClassesNames;
+    private static Statement select;
     private static PreparedStatement selectStudentFios;
 
     private static PreparedStatement selectFinalGrades;
+    private static PreparedStatement selectGrades;
 
 
     public static boolean isDataValid(String login, String pswd) throws SQLException {
@@ -88,7 +93,7 @@ public class DataController {
             selectTeachersFioPS = conn.prepareStatement("select fio from teachers where mail = ?");
             selectStudentsFioPS = conn.prepareStatement("select fio from students  where mail = ?");
 
-            selectClassesNames = conn.createStatement();
+            select = conn.createStatement();
             selectStudentFios = conn.prepareStatement("select fio from students where class_name = ?");
 
             selectFinalGrades = conn.prepareStatement("SELECT subject_name,\n" +
@@ -103,6 +108,11 @@ public class DataController {
                     "where fio = ?" +
                     "GROUP BY subject_name, номер_четверти;");
 
+            selectGrades = conn.prepareStatement("select students.fio, date, teachers.fio, mark " +
+                    "from (((marks join students) join teachers) join subjects)\n" +
+                    "where subject_name = ?" +
+                    "and students.class_name = ?");
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -111,7 +121,7 @@ public class DataController {
     public static List<String> getClassesNames() throws SQLException {
         List<String> classesNames = new ArrayList<>();
 
-        resultSet = selectClassesNames.executeQuery("select class_name from classes;");
+        resultSet = select.executeQuery("select class_name from classes;");
 
         while (resultSet.next()) {
             classesNames.add(resultSet.getString(1));
@@ -136,7 +146,6 @@ public class DataController {
     public static ObservableList<SubjectFinalGrade> getSubjectFinalGrades(String studentName) throws SQLException {
         ObservableList<SubjectFinalGrade> subjectFinalGrades = FXCollections.observableArrayList();
 
-
         //Мапа заполняется  по принципу: если есть ключ, то добавляем инфу в значение, а если нет, то добавляем новую пару.
         Map<String, SubjectFinalGrade> subjectFinalGradeMap = new HashMap<>();
 
@@ -159,5 +168,39 @@ public class DataController {
         subjectFinalGrades.sort(Comparator.comparingInt(SubjectFinalGrade::getNumber));
 
         return subjectFinalGrades;
+    }
+
+    public static List<String> getSubjectNames() throws SQLException {
+        List<String> subjectNames = new ArrayList<>();
+
+        resultSet = select.executeQuery("select subject_name from subjects;");
+
+        while (resultSet.next()) {
+            subjectNames.add(resultSet.getString(1));
+        }
+
+        return subjectNames;
+    }
+
+    public static ObservableList<SubjectGrade> getSubjectGrades(String[] selectedItems) throws SQLException {
+        ObservableList<SubjectGrade> subjectGrades = FXCollections.observableArrayList();
+
+        selectGrades.setString(1, selectedItems[1]);
+        selectGrades.setString(2, selectedItems[0]);
+        resultSet = selectGrades.executeQuery();
+
+
+        while (resultSet.next()) {
+            String studentName = resultSet.getString(1);
+            String date = resultSet.getDate(2)
+                    .toLocalDate()
+                    .format(DateTimeFormatter.ofPattern("EEEE, dd.MM.yyyy", Locale.getDefault()));
+            String teacher = resultSet.getString(3);
+            int mark = resultSet.getInt(4);
+
+            subjectGrades.add(new SubjectGrade(studentName, date, teacher, mark));
+        }
+
+        return subjectGrades;
     }
 }
