@@ -1,6 +1,5 @@
 package Controllers;
 
-import Entities.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -36,10 +35,10 @@ public class LogInController {
         String login = logInTextField.getText();
         String pswd = pswdPasswordField.getText();
 
-        boolean dataIsValid = DataContrloller.isDataValid(login, pswd);
+        boolean dataIsValid = DataController.isDataValid(login, pswd);
 
         if(dataIsValid) {
-            TestApplication.user.setName(DataContrloller.getName(login));
+            TestApplication.user.setName(DataController.getName(login));
 
             //Получение FXMLLoader объекта  для перехода к новой сцене и доступа к котроллеру этой сцены
             FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("..//fxmls//HomePage.fxml")));

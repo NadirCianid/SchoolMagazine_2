@@ -20,19 +20,19 @@
                <children>
                   <Pane fx:id="finalGradesPane" prefHeight="478.0" prefWidth="552.0" visible="false">
                      <children>
-                        <TableView fx:id="FinalGradesTableView" layoutY="-1.0" prefHeight="478.0" prefWidth="552.0">
+                        <TableView fx:id="finalGradesTableView" layoutY="-1.0" prefHeight="478.0" prefWidth="552.0">
                           <columns>
-                            <TableColumn prefWidth="28.000000774860382" text="№" />
-                            <TableColumn prefWidth="143.2000389099121" text="Название Предмета" />
-                              <TableColumn maxWidth="75.0" prefWidth="143.2000389099121" text="1 Четверть" />
-                              <TableColumn maxWidth="75.0" prefWidth="143.2000389099121" text="2 Четверть" />
-                              <TableColumn maxWidth="75.0" prefWidth="143.2000389099121" text="3 Четверть" />
-                              <TableColumn maxWidth="75.0" prefWidth="143.2000389099121" text="4 Четверть" />
-                              <TableColumn maxWidth="75.0" prefWidth="143.2000389099121" text="Итоговая" />
+                            <TableColumn fx:id="number" editable="false" prefWidth="28.000000774860382" text="№" />
+                            <TableColumn fx:id="subjectName" editable="false" prefWidth="143.2000389099121" text="Название Предмета" />
+                              <TableColumn fx:id="firstQuarter" editable="false" maxWidth="75.0" prefWidth="143.2000389099121" text="1 Четверть" />
+                              <TableColumn fx:id="secondQuarter" editable="false" maxWidth="75.0" prefWidth="143.2000389099121" text="2 Четверть" />
+                              <TableColumn fx:id="thirdQuarter" editable="false" maxWidth="75.0" prefWidth="143.2000389099121" text="3 Четверть" />
+                              <TableColumn fx:id="fourthQuarter" editable="false" maxWidth="75.0" prefWidth="143.2000389099121" text="4 Четверть" />
+                              <TableColumn fx:id="finalGrade" editable="false" maxWidth="75.0" prefWidth="143.2000389099121" text="Итоговая" />
                           </columns>
                         </TableView>
                      </children></Pane>
-                  <Pane prefHeight="478.0" prefWidth="552.0" visible="false">
+                  <Pane fx:id="gradesPane" prefHeight="478.0" prefWidth="552.0" visible="false">
                      <children>
                         <TableView layoutX="-3.0" layoutY="-1.0" prefHeight="433.0" prefWidth="558.0">
                           <columns>
@@ -44,7 +44,7 @@
                           </columns>
                         </TableView>
                      </children></Pane>
-                  <Pane prefHeight="478.0" prefWidth="552.0" visible="false">
+                  <Pane fx:id="homeworkPane" prefHeight="478.0" prefWidth="552.0" visible="false">
                      <children>
                         <TableView prefHeight="425.0" prefWidth="552.0">
                           <columns>
@@ -55,7 +55,7 @@
                           </columns>
                         </TableView>
                      </children></Pane>
-                  <Pane prefHeight="478.0" prefWidth="552.0" visible="false">
+                  <Pane fx:id="reproofsPane" prefHeight="478.0" prefWidth="552.0" visible="false">
                      <children>
                         <TableView prefHeight="425.0" prefWidth="552.0">
                            <columns>
@@ -71,7 +71,7 @@
                       <Button fx:id="gradeButton" mnemonicParsing="false" onAction="#grade" prefHeight="26.0" prefWidth="120.0" text="Выставить оценку" />
                         <Button fx:id="submitHomeworkButton" layoutX="10.0" layoutY="16.0" mnemonicParsing="false" onAction="#submitHomework" prefHeight="26.0" prefWidth="180.0" text="Выложить домшнее задание" />
                         <Button fx:id="submitReproofButton" layoutX="153.0" layoutY="16.0" mnemonicParsing="false" onAction="#submitReproof" prefHeight="26.0" prefWidth="150.0" text="Оставить замечание" />
-                        <Button fx:id="rebootButton" layoutX="337.0" layoutY="17.0" mnemonicParsing="false" onAction="#rebootPage" prefHeight="26.0" prefWidth="70.0" text="Обновить" />
+                        <Button fx:id="rebootButton" layoutX="337.0" layoutY="17.0" mnemonicParsing="false" onAction="#rebootActiveTable" prefHeight="26.0" prefWidth="70.0" text="Обновить" />
                     </items>
                   </ToolBar>
                </children></AnchorPane>
@@ -103,17 +103,17 @@
                         <Button fx:id="finalGradesButton" mnemonicParsing="false" onAction="#showFinalGrades" prefWidth="130.0" text="Итоговые оценки" />
                         <Button fx:id="gradesButton" mnemonicParsing="false" onAction="#showGrades" prefWidth="130.0" text="Оценки" />
                         <Button fx:id="homeworkButton" mnemonicParsing="false" onAction="#showHomework" prefWidth="130.0" text="Домашнее задание" />
-                        <Button fx:id="reproofsButton" mnemonicParsing="false" onAction="#shoowReproofs" prefWidth="130.0" text="Замечания" />
+                        <Button fx:id="reproofsButton" mnemonicParsing="false" onAction="#showReproofs" prefWidth="130.0" text="Замечания" />
                         <ToolBar maxWidth="130.0" prefHeight="10.0" prefWidth="130.0" />
                         <Label text="Работаем с:" />
-                        <ToolBar fx:id="selectedItem1" layoutX="23.0" layoutY="292.0" maxWidth="130.0" prefHeight="25.0" prefWidth="130.0">
+                        <ToolBar layoutX="23.0" layoutY="292.0" maxWidth="130.0" prefHeight="25.0" prefWidth="130.0">
                            <items>
-                              <Label prefHeight="18.0" prefWidth="115.0" text="3530902/00202" />
+                              <Label fx:id="selectedItem1" prefHeight="18.0" prefWidth="115.0" />
                            </items>
                         </ToolBar>
                         <ToolBar maxWidth="130.0" prefHeight="25.0" prefWidth="130.0">
                            <items>
-                              <Label fx:id="selectedItem2" prefHeight="18.0" prefWidth="115.0" text="Иван Иванов" />
+                              <Label fx:id="selectedItem2" prefHeight="18.0" prefWidth="115.0" />
                            </items>
                         </ToolBar>
                      </children>

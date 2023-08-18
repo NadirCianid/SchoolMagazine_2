@@ -22,7 +22,7 @@ public class TestApplication extends Application {
     }
 
     public static void main(String[] args) throws SQLException {
-        DataContrloller.initializeDataBase();
+        DataController.initializeDataBase();
         user = new User();
         launch(args);
     }
