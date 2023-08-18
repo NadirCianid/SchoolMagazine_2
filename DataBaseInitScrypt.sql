@@ -117,4 +117,10 @@ insert into marks (student_id, teacher_id, subject_id, mark, date)
     (1, 1, 2, 5, "10.11.2010"), (1,1,2,7,"11.12.2010"),
     (1, 1, 2, 8, "10.1.2010"), (1,1,2,7,"11.2.2010");
     
+insert into homeworks (class_name, subject_id, teacher_id, deadline, body) 
+	values ("6 A", 1, 1, "11.2.2010", "Пацаны, чилим жестко!");
+    
+insert into reproofs (student_id, teacher_id, body) 
+	values (1, 1, "Слишком классно прогает!");
+    
     

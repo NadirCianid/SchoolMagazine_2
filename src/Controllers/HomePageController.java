@@ -1,5 +1,6 @@
 package Controllers;
 
+import Entities.HomeworkOrReproof;
 import Entities.SubjectFinalGrade;
 import Entities.SubjectGrade;
 import Staff.TableType;
@@ -20,14 +21,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.Objects;
 
 import static Controllers.DataController.*;
 import static Controllers.TestApplication.user;
 import static Staff.Assistant.*;
-import static Staff.TableType.FINAL_GRADES;
-import static Staff.TableType.GRADES;
+import static Staff.TableType.*;
 
 
 public class HomePageController {
@@ -67,6 +66,29 @@ public class HomePageController {
     @FXML
     private TableColumn<SubjectGrade, String> student;
 
+
+    @FXML
+    private TableView<HomeworkOrReproof> homeworkTableView;
+
+    @FXML
+    private TableColumn<HomeworkOrReproof, Integer> homeworkNumber;
+    @FXML
+    private TableColumn<HomeworkOrReproof, String> homeworkDeadline;
+    @FXML
+    private TableColumn<HomeworkOrReproof, String> homeworkTeacher;
+    @FXML
+    private TableColumn<HomeworkOrReproof, String> homeworkBody;
+
+
+    @FXML
+    private TableView<HomeworkOrReproof> reproofsTableView;
+
+    @FXML
+    private TableColumn<HomeworkOrReproof, Integer> reproofNumber;
+    @FXML
+    private TableColumn<HomeworkOrReproof, String> reproofTeacher;
+    @FXML
+    private TableColumn<HomeworkOrReproof, String> reproofBody;
 
 
     @FXML
@@ -153,11 +175,6 @@ public class HomePageController {
     }
 
     @FXML
-    void showReproofs(ActionEvent event) {
-
-    }
-
-    @FXML
     void showFinalGrades(ActionEvent event) throws SQLException {
         selectedItems = getClassAndStudent();
         setSelectedItems();
@@ -213,11 +230,21 @@ public class HomePageController {
         rebootTable(GRADES);
     }
 
-
-
     @FXML
-    void showHomework(ActionEvent event) {
+    void showHomeworkAndReproofs(ActionEvent event) throws SQLException {
+        //В зависимости от названия нажатой кнопки будет выводится таблица с дз или с замечаниями
+        switch (((Button) event.getSource()).getText()) {
+            case "Домашнее задание" -> {
+                selectedItems = getClassAndSubject();
+                rebootTable(HOMEWORK);
+            }
+            case "Замечания" -> {
+                selectedItems = getClassAndStudent();
+                rebootTable(REPROOFS);
+            }
+        }
 
+        setSelectedItems();
     }
 
     @FXML
@@ -230,10 +257,33 @@ public class HomePageController {
 
     }
 
-    private void fillReproofsTable(String[] selectedItems) {
+    private void fillReproofsTable(String[] selectedItems) throws SQLException {
+        //Настройка соответсвия столбцов и полей хранимой сущности.
+        //Таблица будет хранить домашние задания по предмету (объекты HomeworkOrReproof).
+        reproofNumber.setCellValueFactory(new PropertyValueFactory<>("homeworkOrReproofNumber"));
+        reproofTeacher.setCellValueFactory(new PropertyValueFactory<>("homeworkOrReproofTeacher"));
+        reproofBody.setCellValueFactory(new PropertyValueFactory<>("homeworkOrReproofBody"));
+
+        reproofsTableView.setItems(getReproofs(selectedItems[1]));
+
+        /*После заполнения таблицы необходимо обнулить счетчик в классе SubjectFinalGrade,
+        чтобы при следующем заполнении он был равен нулю. */
+        HomeworkOrReproof.resetCounter();
     }
 
-    private void fillHomeworkTable(String[] selectedItems) {
+    private void fillHomeworkTable(String[] selectedItems) throws SQLException {
+        //Настройка соответсвия столбцов и полей хранимой сущности.
+        //Таблица будет хранить домашние задания по предмету (объекты HomeworkOrReproof).
+        homeworkNumber.setCellValueFactory(new PropertyValueFactory<>("homeworkOrReproofNumber"));
+        homeworkDeadline.setCellValueFactory(new PropertyValueFactory<>("homeworkOrReproofDeadline"));
+        homeworkTeacher.setCellValueFactory(new PropertyValueFactory<>("homeworkOrReproofTeacher"));
+        homeworkBody.setCellValueFactory(new PropertyValueFactory<>("homeworkOrReproofBody"));
+
+        homeworkTableView.setItems(getHomework(selectedItems));
+
+        /*После заполнения таблицы необходимо обнулить счетчик в классе SubjectFinalGrade,
+        чтобы при следующем заполнении он был равен нулю. */
+        HomeworkOrReproof.resetCounter();
     }
 
     private void fillFinalGradesTable(String[] selectedItems) throws SQLException {

@@ -1,13 +1,12 @@
 package Controllers;
 
+import Entities.HomeworkOrReproof;
 import Entities.SubjectFinalGrade;
 import Entities.SubjectGrade;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.*;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
@@ -25,6 +24,8 @@ public class DataController {
 
     private static PreparedStatement selectFinalGrades;
     private static PreparedStatement selectGrades;
+    private static PreparedStatement selectHomework;
+    private static PreparedStatement selectReproofs;
 
 
     public static boolean isDataValid(String login, String pswd) throws SQLException {
@@ -112,6 +113,14 @@ public class DataController {
                     "from (((marks join students) join teachers) join subjects)\n" +
                     "where subject_name = ?" +
                     "and students.class_name = ?");
+
+            selectHomework = conn.prepareStatement("select deadline, teachers.fio, body \n" +
+                    "from ((homeworks join teachers) join subjects) \n" +
+                    "where class_name = ? and subject_name = ?;");
+
+            selectReproofs = conn.prepareStatement("select teachers.fio, text \n" +
+                    "from ((reproofs join teachers) join students) \n" +
+                    "where students.fio = ?");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -202,5 +211,46 @@ public class DataController {
         }
 
         return subjectGrades;
+    }
+
+    public static ObservableList<HomeworkOrReproof> getHomework(String[] selectedItems) throws SQLException {
+        ObservableList<HomeworkOrReproof> homeworkList = FXCollections.observableArrayList();
+
+        selectHomework.setString(1, selectedItems[0]);
+        selectHomework.setString(2, selectedItems[1]);
+        resultSet = selectHomework.executeQuery();
+
+
+        while (resultSet.next()) {
+            String deadline = resultSet.getDate(1)
+                    .toLocalDate()
+                    .format(DateTimeFormatter.ofPattern("EEEE, dd.MM.yyyy", Locale.getDefault()));
+
+            String teacher = resultSet.getString(2);
+            String body = resultSet.getString(3);
+
+
+            homeworkList.add(new HomeworkOrReproof(deadline, teacher, body));
+        }
+
+        return homeworkList;
+    }
+
+    public static ObservableList<HomeworkOrReproof> getReproofs(String selectedStudent) throws SQLException {
+        ObservableList<HomeworkOrReproof> reproofsList = FXCollections.observableArrayList();
+
+        selectReproofs.setString(1, selectedStudent);
+        resultSet = selectReproofs.executeQuery();
+
+
+        while (resultSet.next()) {
+            String teacher = resultSet.getString(1);
+            String body = resultSet.getString(2);
+
+
+            reproofsList.add(new HomeworkOrReproof("", teacher, body));
+        }
+
+        return reproofsList;
     }
 }

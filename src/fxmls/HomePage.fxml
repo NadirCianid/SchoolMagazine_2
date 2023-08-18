@@ -46,22 +46,22 @@
                      </children></Pane>
                   <Pane fx:id="homeworkPane" prefHeight="478.0" prefWidth="552.0" visible="false">
                      <children>
-                        <TableView prefHeight="425.0" prefWidth="552.0">
+                        <TableView fx:id="homeworkTableView" prefHeight="425.0" prefWidth="552.0">
                           <columns>
-                            <TableColumn prefWidth="25.599976360797882" text="№" />
-                            <TableColumn prefWidth="68.79995346069336" text="Дедлайн" />
-                              <TableColumn prefWidth="120.79998779296875" text="Учитель" />
-                              <TableColumn prefWidth="338.40003967285156" text="Текст Д/З" />
+                            <TableColumn fx:id="homeworkNumber" prefWidth="25.599976360797882" text="№" />
+                            <TableColumn fx:id="homeworkDeadline" prefWidth="68.79995346069336" text="Дедлайн" />
+                              <TableColumn fx:id="homeworkTeacher" prefWidth="120.79998779296875" text="Учитель" />
+                              <TableColumn fx:id="homeworkBody" prefWidth="332.00001525878906" text="Текст Д/З" />
                           </columns>
                         </TableView>
                      </children></Pane>
                   <Pane fx:id="reproofsPane" prefHeight="478.0" prefWidth="552.0" visible="false">
                      <children>
-                        <TableView prefHeight="425.0" prefWidth="552.0">
+                        <TableView fx:id="reproofsTableView" prefHeight="425.0" prefWidth="552.0">
                            <columns>
-                              <TableColumn prefWidth="25.599976360797882" text="№" />
-                              <TableColumn prefWidth="120.79998779296875" text="Учитель" />
-                              <TableColumn prefWidth="404.8000030517578" text="Текст замечания" />
+                              <TableColumn fx:id="reproofNumber" prefWidth="25.599976360797882" text="№" />
+                              <TableColumn fx:id="reproofTeacher" prefWidth="120.79998779296875" text="Учитель" />
+                              <TableColumn fx:id="reproofBody" prefWidth="404.8000030517578" text="Текст замечания" />
                            </columns>
                         </TableView>
                      </children>
@@ -102,8 +102,8 @@
                         <ToolBar layoutX="23.0" layoutY="271.0" maxWidth="130.0" prefHeight="10.0" prefWidth="130.0" />
                         <Button fx:id="finalGradesButton" mnemonicParsing="false" onAction="#showFinalGrades" prefWidth="130.0" text="Итоговые оценки" />
                         <Button fx:id="gradesButton" mnemonicParsing="false" onAction="#showGrades" prefWidth="130.0" text="Оценки" />
-                        <Button fx:id="homeworkButton" mnemonicParsing="false" onAction="#showHomework" prefWidth="130.0" text="Домашнее задание" />
-                        <Button fx:id="reproofsButton" mnemonicParsing="false" onAction="#showReproofs" prefWidth="130.0" text="Замечания" />
+                        <Button fx:id="homeworkButton" mnemonicParsing="false" onAction="#showHomeworkAndReproofs" prefWidth="130.0" text="Домашнее задание" />
+                        <Button fx:id="reproofsButton" mnemonicParsing="false" onAction="#showHomeworkAndReproofs" prefWidth="130.0" text="Замечания" />
                         <ToolBar maxWidth="130.0" prefHeight="10.0" prefWidth="130.0" />
                         <Label text="Работаем с:" />
                         <ToolBar layoutX="23.0" layoutY="292.0" maxWidth="130.0" prefHeight="25.0" prefWidth="130.0">

@@ -1,7 +1,5 @@
 package Entities;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class SubjectGrade {
     private static int currentNumber = 0; //счетчик количества текущих оценок
