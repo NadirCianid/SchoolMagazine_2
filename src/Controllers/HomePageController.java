@@ -3,6 +3,7 @@ package Controllers;
 import Entities.HomeworkOrReproof;
 import Entities.SubjectFinalGrade;
 import Entities.SubjectGrade;
+import Entities.User;
 import Staff.TableType;
 import Staff.UserRole;
 import javafx.event.ActionEvent;
@@ -151,14 +152,13 @@ public class HomePageController {
     }
 
     @FXML
-    void grade(ActionEvent event) {
-
-    }
-
-    @FXML
     void rebootActiveTable(ActionEvent event) throws IOException, SQLException {
+        if(selectedItems == null) {
+            return;
+        }
+
         FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("..//fxmls//HomePage.fxml")));
-        // TODO: выяснить, какая таблица активна в данный момент и обновить ее с помощью метода rebootTable()
+
         Parent root = fxmlLoader.load();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
@@ -247,14 +247,32 @@ public class HomePageController {
         setSelectedItems();
     }
 
-    @FXML
-    void submitHomework(ActionEvent event) {
+    private void showInsertPage(ActionEvent event, String submitType) throws IOException, SQLException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("..//fxmls//InsertPage.fxml")));
 
+        Parent root = fxmlLoader.load();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
+        InsertPageController insertPageController = fxmlLoader.getController();
+        insertPageController.init(submitType);
     }
 
     @FXML
-    void submitReproof(ActionEvent event) {
+    private void grade(ActionEvent event) throws IOException, SQLException {
+        showInsertPage(event, "grade");
+    }
 
+    @FXML
+    private void submitHomework(ActionEvent event) throws IOException, SQLException {
+        showInsertPage(event, "homework");
+    }
+
+    @FXML
+    private void submitReproof(ActionEvent event) throws IOException, SQLException {
+        showInsertPage(event, "reproof");
     }
 
     private void fillReproofsTable(String[] selectedItems) throws SQLException {

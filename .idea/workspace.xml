@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="45300683-648f-47db-937a-eacff8028b5f" name="Changes" comment="The ShowGrades button now works.">
-      <change afterPath="$PROJECT_DIR$/src/Entities/HomeworkOrReproof.java" afterDir="false" />
+    <list default="true" id="45300683-648f-47db-937a-eacff8028b5f" name="Changes" comment="Submitting of grades, homework and reproof now works.">
+      <change afterPath="$PROJECT_DIR$/src/Controllers/InsertPageController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/fxmls/InsertPage.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DataBaseInitScrypt.sql" beforeDir="false" afterPath="$PROJECT_DIR$/DataBaseInitScrypt.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controllers/DataController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/DataController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controllers/HomePageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/HomePageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entities/SubjectGrade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/SubjectGrade.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fxmls/HomePage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxmls/HomePage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/LogInController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/LogInController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/план.txt" beforeDir="false" afterPath="$PROJECT_DIR$/план.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,8 +20,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="FxmlFile" />
         <option value="Enum" />
+        <option value="FxmlFile" />
         <option value="Class" />
       </list>
     </option>
@@ -106,7 +108,7 @@
       <updated>1691677505932</updated>
       <workItem from="1691677509587" duration="1577000" />
       <workItem from="1691680252210" duration="26073000" />
-      <workItem from="1692130000412" duration="24165000" />
+      <workItem from="1692130000412" duration="36960000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit. At this point I created Database.">
       <created>1691677972624</created>
@@ -143,7 +145,14 @@
       <option name="project" value="LOCAL" />
       <updated>1692384506961</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="The showHomework and the showReproofs buttons now work.">
+      <created>1692394905198</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1692394905198</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -166,6 +175,8 @@
     <MESSAGE value="Log In now works. After successful log in user information sets in appropriate labels." />
     <MESSAGE value="The ShowFinalGrades button now works. I made the reboot button working." />
     <MESSAGE value="The ShowGrades button now works." />
-    <option name="LAST_COMMIT_MESSAGE" value="The ShowGrades button now works." />
+    <MESSAGE value="The showHomework and the showReproofs buttons now work." />
+    <MESSAGE value="Submitting of grades, homework and reproof now works." />
+    <option name="LAST_COMMIT_MESSAGE" value="Submitting of grades, homework and reproof now works." />
   </component>
 </project>

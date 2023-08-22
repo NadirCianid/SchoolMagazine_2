@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.InsertPageController">
+   <children>
+      <Pane fx:id="gradePane" prefHeight="480.0" prefWidth="720.0" visible="false">
+         <children>
+            <Label layoutX="241.0" layoutY="50.0" text="Выставление оценки">
+               <font>
+                  <Font name="Consolas" size="24.0" />
+               </font>
+            </Label>
+            <VBox alignment="CENTER" layoutX="161.0" layoutY="109.0" prefHeight="262.0" prefWidth="397.0" spacing="10.0">
+               <children>
+                  <ToolBar prefHeight="40.0" prefWidth="200.0">
+                     <items>
+                        <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="55.0" prefHeight="20.0" prefWidth="55.0" text="Класс">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="classGradeComboBox" maxWidth="70.0" onAction="#selectClassForGrade" prefHeight="26.0" prefWidth="70.0" />
+                        <Separator orientation="VERTICAL" prefHeight="20.0" />
+                        <Label fx:id="studentLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="13.0" prefHeight="20.0" prefWidth="62.0" text="Ученик">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="studentGradeComboBox" layoutX="60.0" layoutY="10.0" maxWidth="160.0"  prefHeight="26.0" prefWidth="169.0" />
+                     </items>
+                  </ToolBar>
+                  <ToolBar layoutX="10.0" layoutY="17.0" prefHeight="40.0" prefWidth="200.0">
+                     <items>
+                        <Label fx:id="gradeLabel" alignment="CENTER" contentDisplay="CENTER" maxHeight="53.0" maxWidth="55.0" prefHeight="20.0" prefWidth="55.0" text="Оценка">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="gradeComboBox" maxWidth="70.0" prefHeight="26.0" prefWidth="70.0" />
+                        <Separator orientation="VERTICAL" prefHeight="20.0" />
+                        <Label fx:id="subjectLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="13.0" prefHeight="20.0" prefWidth="62.0" text="Предмет">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="subjectGradeComboBox" layoutX="60.0" layoutY="10.0" maxWidth="160.0" prefHeight="26.0" prefWidth="167.0" />
+                     </items>
+                  </ToolBar>
+                  <Button mnemonicParsing="false" onAction="#submitGrade" prefHeight="26.0" prefWidth="166.0" text="Выставить" />
+               </children>
+               <padding>
+                  <Insets bottom="30.0" />
+               </padding>
+            </VBox>
+         </children>
+      </Pane>
+      <Pane fx:id="homeworkPane" prefHeight="480.0" prefWidth="720.0" visible="false">
+         <children>
+            <Label layoutX="168.0" layoutY="54.0" text="Выставление домашнего задания">
+               <font>
+                  <Font name="Consolas" size="24.0" />
+               </font>
+            </Label>
+            <VBox alignment="CENTER" layoutX="161.0" layoutY="109.0" prefHeight="262.0" prefWidth="397.0" spacing="10.0">
+               <children>
+                  <ToolBar prefHeight="40.0" prefWidth="200.0">
+                     <items>
+                        <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="55.0" prefHeight="20.0" prefWidth="55.0" text="Класс">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="classHWComboBox" maxWidth="70.0" prefHeight="26.0" prefWidth="70.0" />
+                        <Separator orientation="VERTICAL" prefHeight="20.0" />
+                        <Label fx:id="subjectLabel1" alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="62.0" text="Предмет">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="subjectHWComboBox" maxWidth="160.0" prefHeight="26.0" prefWidth="167.0" />
+                     </items>
+                  </ToolBar>
+                  <ToolBar layoutX="10.0" layoutY="17.0" prefHeight="40.0" prefWidth="200.0">
+                     <items>
+                        <Label text="Deadline">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <DatePicker fx:id="deadlineDatePicker" promptText="ещё вчера" />
+                     </items>
+                  </ToolBar>
+                  <TextArea fx:id="homeworkTextArea" prefHeight="130.0" prefWidth="376.0" promptText="Текст домашнего задания" />
+                  <Button mnemonicParsing="false" onAction="#submitHomework" prefHeight="26.0" prefWidth="166.0" text="Выставить" />
+               </children>
+               <padding>
+                  <Insets bottom="30.0" />
+               </padding>
+            </VBox>
+         </children>
+      </Pane>
+      <Pane fx:id="reproofPane" prefHeight="480.0" prefWidth="720.0" visible="false">
+         <children>
+            <Label layoutX="221.0" layoutY="54.0" text="Выставление замечания">
+               <font>
+                  <Font name="Consolas" size="24.0" />
+               </font>
+            </Label>
+            <VBox alignment="CENTER" layoutX="161.0" layoutY="109.0" prefHeight="262.0" prefWidth="397.0" spacing="10.0">
+               <children>
+                  <ToolBar prefHeight="40.0" prefWidth="200.0">
+                     <items>
+                        <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="55.0" prefHeight="20.0" prefWidth="55.0" text="Класс">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="classReproofComboBox" maxWidth="70.0" onAction="#selectClassForReproof" prefHeight="26.0" prefWidth="70.0" />
+                        <Separator orientation="VERTICAL" prefHeight="20.0" />
+                        <Label fx:id="studentLabel11" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="13.0" prefHeight="20.0" prefWidth="62.0" text="Ученик">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="studentReproofComboBox" layoutX="60.0" layoutY="10.0" maxWidth="160.0"  prefHeight="26.0" prefWidth="169.0" />
+                     </items>
+                  </ToolBar>
+                  <TextArea fx:id="reproofTextArea" prefHeight="130.0" prefWidth="376.0" promptText="Текст замечания" />
+                  <Button mnemonicParsing="false" onAction="#submitReproof" prefHeight="26.0" prefWidth="166.0" text="Выставить" />
+               </children>
+               <padding>
+                  <Insets bottom="30.0" />
+               </padding>
+            </VBox>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

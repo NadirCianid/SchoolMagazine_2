@@ -27,6 +27,10 @@ public class DataController {
     private static PreparedStatement selectHomework;
     private static PreparedStatement selectReproofs;
 
+    private static PreparedStatement insertGrade;
+    private static PreparedStatement insertHomework;
+    private static PreparedStatement insertReproof;
+
 
     public static boolean isDataValid(String login, String pswd) throws SQLException {
         //Настройка и проверка PreparedStatement учетной записи среди учеников
@@ -122,13 +126,27 @@ public class DataController {
                     "from ((reproofs join teachers) join students) \n" +
                     "where students.fio = ?");
 
+            insertGrade = conn.prepareStatement("insert into marks (student_id, teacher_id, subject_id, mark, date)\n" +
+                    "\tvalues ((select student_id from students where fio = ?)\n" +
+                    "\t\t  , (select teacher_id from teachers where fio = ?)\n" +
+                    "          , (select subject_id from subjects where subject_name = ?), ?, current_date())");
+
+            insertHomework = conn.prepareStatement("insert into homeworks (class_name, subject_id, teacher_id, deadline, body) \n" +
+                    "\tvalues (\"6 A\"\n" +
+                    "    , (select subject_id from subjects where subject_name = ?)\n" +
+                    "    , (select teacher_id from teachers where fio = ?)\n" +
+                    "    , current_date(), ?);");
+
+            insertReproof = conn.prepareStatement("insert into reproofs (student_id, teacher_id, text) \n" +
+                    "\tvalues ((select student_id from students where fio = ?)\n" +
+                    "    , (select teacher_id from teachers where fio = ?), ?);");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public static List<String> getClassesNames() throws SQLException {
-        List<String> classesNames = new ArrayList<>();
+    public static ObservableList<String> getClassesNames() throws SQLException {
+        ObservableList<String> classesNames = FXCollections.observableArrayList();
 
         resultSet = select.executeQuery("select class_name from classes;");
 
@@ -139,8 +157,8 @@ public class DataController {
         return classesNames;
     }
 
-    public static List<String> getStudentsFios(String selectedClass) throws SQLException {
-        List<String> studentsFios = new ArrayList<>();
+    public static ObservableList<String> getStudentsFios(String selectedClass) throws SQLException {
+        ObservableList<String> studentsFios = FXCollections.observableArrayList();
 
         selectStudentFios.setString(1, selectedClass);
         resultSet = selectStudentFios.executeQuery();
@@ -179,8 +197,8 @@ public class DataController {
         return subjectFinalGrades;
     }
 
-    public static List<String> getSubjectNames() throws SQLException {
-        List<String> subjectNames = new ArrayList<>();
+    public static ObservableList<String> getSubjectNames() throws SQLException {
+        ObservableList<String> subjectNames = FXCollections.observableArrayList();
 
         resultSet = select.executeQuery("select subject_name from subjects;");
 
@@ -252,5 +270,31 @@ public class DataController {
         }
 
         return reproofsList;
+    }
+
+    public static void insertGrade(String student, String teacher, String subject, int grade) throws SQLException {
+        insertGrade.setString(1, student);
+        insertGrade.setString(2, teacher);
+        insertGrade.setString(3, subject);
+        insertGrade.setInt(4, grade);
+
+        insertGrade.executeUpdate();
+    }
+
+    public static void insertHomework(String className, String subject, String teacher, String homeworkText) throws SQLException {
+        insertHomework.setString(1, className);
+        insertHomework.setString(2, subject);
+        insertHomework.setString(3, teacher);
+        insertHomework.setString(4, homeworkText);
+
+        insertHomework.executeUpdate();
+    }
+
+    public static void insertReproof(String student, String teacher, String reproofText) throws SQLException {
+        insertReproof.setString(1, student);
+        insertReproof.setString(2, teacher);
+        insertReproof.setString(3, reproofText);
+
+        insertReproof.executeUpdate();
     }
 }

@@ -7,6 +7,7 @@ import static Staff.UserRole.*;
 public class User {
     private UserRole role;
     private String name;
+    private String login;
 
     public boolean setRole(int isStudent, int isTeacher) {
         if(isStudent == 0 && isTeacher == 0 || isStudent == 1 && isTeacher == 1) {
@@ -31,5 +32,13 @@ public class User {
 
     public String getName() {
         return name;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getLogin() {
+        return login;
     }
 }
