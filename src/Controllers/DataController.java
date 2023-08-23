@@ -7,6 +7,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.*;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
@@ -118,9 +120,10 @@ public class DataController {
                     "where subject_name = ?" +
                     "and students.class_name = ?");
 
-            selectHomework = conn.prepareStatement("select deadline, teachers.fio, body \n" +
-                    "from ((homeworks join teachers) join subjects) \n" +
-                    "where class_name = ? and subject_name = ?;");
+            selectHomework = conn.prepareStatement("select deadline, teachers.fio, body , subject_id\n" +
+                    "                    from (homeworks join teachers)\n" +
+                    "                    where class_name = ? \n" +
+                    "                    and subject_id = (select subject_id from subjects where subject_name = ?);");
 
             selectReproofs = conn.prepareStatement("select teachers.fio, text \n" +
                     "from ((reproofs join teachers) join students) \n" +
@@ -132,10 +135,10 @@ public class DataController {
                     "          , (select subject_id from subjects where subject_name = ?), ?, current_date())");
 
             insertHomework = conn.prepareStatement("insert into homeworks (class_name, subject_id, teacher_id, deadline, body) \n" +
-                    "\tvalues (\"6 A\"\n" +
+                    "\tvalues (?\n" +
                     "    , (select subject_id from subjects where subject_name = ?)\n" +
                     "    , (select teacher_id from teachers where fio = ?)\n" +
-                    "    , current_date(), ?);");
+                    "    , ?, ?);");
 
             insertReproof = conn.prepareStatement("insert into reproofs (student_id, teacher_id, text) \n" +
                     "\tvalues ((select student_id from students where fio = ?)\n" +
@@ -281,11 +284,12 @@ public class DataController {
         insertGrade.executeUpdate();
     }
 
-    public static void insertHomework(String className, String subject, String teacher, String homeworkText) throws SQLException {
+    public static void insertHomework(String className, String subject, String teacher, LocalDate deadline, String homeworkText) throws SQLException {
         insertHomework.setString(1, className);
         insertHomework.setString(2, subject);
         insertHomework.setString(3, teacher);
-        insertHomework.setString(4, homeworkText);
+        insertHomework.setDate(4, Date.valueOf(deadline));
+        insertHomework.setString(5, homeworkText);
 
         insertHomework.executeUpdate();
     }

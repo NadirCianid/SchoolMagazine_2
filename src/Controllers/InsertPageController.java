@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import javax.swing.*;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class InsertPageController {
@@ -99,10 +100,11 @@ public class InsertPageController {
         String className;
         String subject;
         String homeworkText;
+        LocalDate deadline = deadlineDatePicker.getValue();
 
         try {
             className = classHWComboBox.getValue();
-            subject = subjectGradeComboBox.getValue();
+            subject = subjectHWComboBox.getValue();
             homeworkText = homeworkTextArea.getText();
         } catch (NullPointerException exception) {
             JOptionPane.showMessageDialog(null, "Выбранны/введены не все параметры \n" +
@@ -110,7 +112,7 @@ public class InsertPageController {
             return;
         }
 
-        DataController.insertHomework(className, subject, TestApplication.user.getName(), homeworkText);
+        DataController.insertHomework(className, subject, TestApplication.user.getName(), deadline, homeworkText);
 
         toHomePage(event);
     }
@@ -153,7 +155,8 @@ public class InsertPageController {
                     grades.add(i);
                 }
 
-                classHWComboBox.setItems(DataController.getClassesNames());
+                classGradeComboBox.setItems(DataController.getClassesNames());
+
                 gradeComboBox.setItems(grades);
                 subjectGradeComboBox.setItems(DataController.getSubjectNames());
             }
