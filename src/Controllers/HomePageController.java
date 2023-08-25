@@ -3,7 +3,6 @@ package Controllers;
 import Entities.HomeworkOrReproof;
 import Entities.SubjectFinalGrade;
 import Entities.SubjectGrade;
-import Entities.User;
 import Staff.TableType;
 import Staff.UserRole;
 import javafx.event.ActionEvent;
@@ -25,7 +24,7 @@ import java.sql.SQLException;
 import java.util.Objects;
 
 import static Controllers.DataController.*;
-import static Controllers.TestApplication.user;
+import static Controllers.Application.user;
 import static Staff.Assistant.*;
 import static Staff.TableType.*;
 

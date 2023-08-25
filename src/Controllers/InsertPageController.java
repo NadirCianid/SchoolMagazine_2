@@ -5,12 +5,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -90,7 +86,7 @@ public class InsertPageController {
             return;
         }
 
-        DataController.insertGrade(student, TestApplication.user.getName(), subject, grade);
+        DataController.insertGrade(student, Application.user.getName(), subject, grade);
 
         toHomePage(event);
     }
@@ -112,7 +108,7 @@ public class InsertPageController {
             return;
         }
 
-        DataController.insertHomework(className, subject, TestApplication.user.getName(), deadline, homeworkText);
+        DataController.insertHomework(className, subject, Application.user.getName(), deadline, homeworkText);
 
         toHomePage(event);
     }
@@ -131,7 +127,7 @@ public class InsertPageController {
             return;
         }
 
-        DataController.insertReproof(student, TestApplication.user.getName(), reproofText);
+        DataController.insertReproof(student, Application.user.getName(), reproofText);
 
         toHomePage(event);
     }
@@ -142,7 +138,7 @@ public class InsertPageController {
         LogInController.toHomePageScene(event, fxmlLoader);
 
         //Инициализация сцены личного кабинета
-        ((HomePageController) fxmlLoader.getController()).init(TestApplication.user.getLogin());
+        ((HomePageController) fxmlLoader.getController()).init(Application.user.getLogin());
     }
 
     public void init(String submitType) throws SQLException {

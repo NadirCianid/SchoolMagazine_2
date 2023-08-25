@@ -38,8 +38,8 @@ public class LogInController {
         boolean dataIsValid = DataController.isDataValid(login, pswd);
 
         if(dataIsValid) {
-            TestApplication.user.setName(DataController.getName(login));
-            TestApplication.user.setLogin(login);
+            Application.user.setName(DataController.getName(login));
+            Application.user.setLogin(login);
 
             //Получение FXMLLoader объекта  для перехода к новой сцене и доступа к котроллеру этой сцены
             FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("..//fxmls//HomePage.fxml")));

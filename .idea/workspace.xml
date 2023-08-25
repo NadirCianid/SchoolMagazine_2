@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="45300683-648f-47db-937a-eacff8028b5f" name="Changes" comment="Grades, homework and reproof submitting now works.">
+    <list default="true" id="45300683-648f-47db-937a-eacff8028b5f" name="Changes" comment="Some bug fixes.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataBaseInitScrypt.sql" beforeDir="false" afterPath="$PROJECT_DIR$/DataBaseInitScrypt.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/DataController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/DataController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/InsertPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/InsertPageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fxmls/InsertPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxmls/InsertPage.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/план.txt" beforeDir="false" afterPath="$PROJECT_DIR$/план.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SchoolMagazine_2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/SchoolMagazine_2.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,24 +36,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Denis/Quasidisk D/Politech/Nesterov/Data Bases/mysql-connector-java-8.0.29.jar&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;org.intellij.sdk.settings.AppSettingsConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Program Files/MySQL/mysql-connector-j-8.0.33/mysql-connector-j-8.0.33.jar",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "org.intellij.sdk.settings.AppSettingsConfigurable"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="Staff" />
@@ -67,7 +63,15 @@
       <recent name="C:\Users\Denis\Quasidisk D\Politech\Nesterov\BDProjects\SchoolMagazine\SchoolMagazine_2\src" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.test">
+  <component name="RunManager" selected="Application.App">
+    <configuration name="App" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="Controllers.TestApplication" />
+      <module name="SchoolMagazine_2" />
+      <option name="VM_PARAMETERS" value="--module-path ${PATH_TO_FX} --add-modules javafx.fxml,javafx.controls,javafx.graphics " />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Staff.Test" />
       <module name="SchoolMagazine_2" />
@@ -81,19 +85,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="test" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="Controllers.TestApplication" />
-      <module name="SchoolMagazine_2" />
-      <option name="VM_PARAMETERS" value="--module-path ${PATH_TO_FX} --add-modules javafx.fxml,javafx.controls,javafx.graphics " />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.Staff.Test" />
-      </list>
-    </recent_temporary>
+    <list>
+      <item itemvalue="Application.App" />
+      <item itemvalue="Application.Test" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -105,7 +100,8 @@
       <updated>1691677505932</updated>
       <workItem from="1691677509587" duration="1577000" />
       <workItem from="1691680252210" duration="26073000" />
-      <workItem from="1692130000412" duration="43241000" />
+      <workItem from="1692130000412" duration="43613000" />
+      <workItem from="1692942620586" duration="2178000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit. At this point I created Database.">
       <created>1691677972624</created>
@@ -156,7 +152,14 @@
       <option name="project" value="LOCAL" />
       <updated>1692736329449</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Some bug fixes.">
+      <created>1692820614760</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1692820614760</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -182,7 +185,8 @@
     <MESSAGE value="The showHomework and the showReproofs buttons now work." />
     <MESSAGE value="Submitting of grades, homework and reproof now works." />
     <MESSAGE value="Grades, homework and reproof submitting now works." />
-    <option name="LAST_COMMIT_MESSAGE" value="Grades, homework and reproof submitting now works." />
+    <MESSAGE value="Some bug fixes." />
+    <option name="LAST_COMMIT_MESSAGE" value="Some bug fixes." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

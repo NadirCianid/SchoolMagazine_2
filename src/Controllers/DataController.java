@@ -52,7 +52,7 @@ public class DataController {
         int isTeacher = resultSet.getInt(1);
 
         //установка нужного статуса в объекте студента. Метод возвращает true, если уч. запись существует.
-        return TestApplication.user.setRole(isStudent, isTeacher);
+        return Application.user.setRole(isStudent, isTeacher);
     }
 
 
