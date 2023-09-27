@@ -3,7 +3,6 @@ package Controllers;
 import Entities.HomeworkOrReproof;
 import Entities.SubjectFinalGrade;
 import Entities.SubjectGrade;
-import Staff.UserRole;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -22,7 +21,8 @@ public class DataController {
     private static PreparedStatement selectTeachersFioPS;
     private static PreparedStatement selectStudentsFioPS;
 
-    private static Statement select;
+    private static Statement selectClasses;
+    private static PreparedStatement selectStudentClass;
     private static PreparedStatement selectStudentFios;
 
     private static PreparedStatement selectFinalGrades;
@@ -101,7 +101,8 @@ public class DataController {
             selectTeachersFioPS = conn.prepareStatement("select fio from teachers where mail = ?");
             selectStudentsFioPS = conn.prepareStatement("select fio from students  where mail = ?");
 
-            select = conn.createStatement();
+            selectClasses = conn.createStatement();
+            selectStudentClass = conn.prepareStatement("select class_name from students where fio = ?");
             selectStudentFios = conn.prepareStatement("select fio from students where class_name = ?");
 
             selectFinalGrades = conn.prepareStatement("SELECT subject_name,\n" +
@@ -152,7 +153,7 @@ public class DataController {
     public static ObservableList<String> getClassesNames() throws SQLException {
         ObservableList<String> classesNames = FXCollections.observableArrayList();
 
-        resultSet = select.executeQuery("select class_name from classes;");
+        resultSet = selectClasses.executeQuery("select class_name from classes;");
 
         while (resultSet.next()) {
             classesNames.add(resultSet.getString(1));
@@ -204,7 +205,7 @@ public class DataController {
     public static ObservableList<String> getSubjectNames() throws SQLException {
         ObservableList<String> subjectNames = FXCollections.observableArrayList();
 
-        resultSet = select.executeQuery("select subject_name from subjects;");
+        resultSet = selectClasses.executeQuery("select subject_name from subjects;");
 
         while (resultSet.next()) {
             subjectNames.add(resultSet.getString(1));
@@ -301,5 +302,14 @@ public class DataController {
         insertReproof.setString(3, reproofText);
 
         insertReproof.executeUpdate();
+    }
+
+    public static String getStudentClass(String studentName) throws SQLException {
+        selectStudentClass.setString(1, studentName);
+
+        resultSet = selectStudentClass.executeQuery();
+        resultSet.next();
+
+        return resultSet.getString(1);
     }
 }

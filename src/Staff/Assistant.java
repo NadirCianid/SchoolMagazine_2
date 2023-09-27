@@ -10,10 +10,14 @@ import java.util.List;
 import static javax.swing.JOptionPane.PLAIN_MESSAGE;
 
 public class Assistant {
-    public static String[] getClassAndStudent() throws SQLException {
+    public static String[] getClassAndStudent(User user) throws SQLException {
         String[] selectedItems = new String[2];
 
-        selectedItems[0] = selectClass();
+        if(user.getRole().equals(UserRole.STUDENT)) {
+            selectedItems[0] = DataController.getStudentClass(user.getName());
+        } else {
+            selectedItems[0] = selectClass();
+        }
         selectedItems[1] = selectStudent(selectedItems[0]);
 
         return selectedItems;
@@ -21,14 +25,21 @@ public class Assistant {
 
     private static String selectStudent(String selectedClass) throws SQLException {
         List<String> studentsIds = DataController.getStudentsFios(selectedClass);
+        String result = "";
+        try {
+            result = (String) JOptionPane.showInputDialog(null,
+                    "Выберите ученика",
+                    "Выбор опорных элементов",
+                    PLAIN_MESSAGE,
+                    null,
+                    studentsIds.toArray(),
+                    studentsIds.get(0));
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("И такоге бывает)");
+        }
 
-        return (String) JOptionPane.showInputDialog(null,
-                "Выберите ученика",
-                "Выбор опорных элементов",
-                PLAIN_MESSAGE,
-                null,
-                studentsIds.toArray(),
-                studentsIds.get(0));
+
+        return result;
     }
 
     private static String selectClass() throws SQLException {
@@ -43,10 +54,14 @@ public class Assistant {
                 classesIds.get(0));
     }
 
-    public static String[] getClassAndSubject() throws SQLException {
+    public static String[] getClassAndSubject(User user) throws SQLException {
         String[] selectedItems = new String[2];
+        if(user.getRole().equals(UserRole.STUDENT)) {
+            selectedItems[0] = DataController.getStudentClass(user.getName());
+        } else {
+            selectedItems[0] = selectClass();
+        }
 
-        selectedItems[0] = selectClass();
         selectedItems[1] = selectSubject();
 
         return selectedItems;

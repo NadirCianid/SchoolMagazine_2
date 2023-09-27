@@ -175,10 +175,14 @@ public class HomePageController {
 
     @FXML
     void showFinalGrades(ActionEvent event) throws SQLException {
-        selectedItems = getClassAndStudent();
+        selectedItems = getClassAndStudent(user);
         setSelectedItems();
 
-        rebootTable(FINAL_GRADES);
+        try{
+            rebootTable(FINAL_GRADES);
+        } catch (SQLException e) {
+            System.out.println("Бывает. Ничего страшного");
+        }
     }
 
     private void setSelectedItems() {
@@ -223,10 +227,15 @@ public class HomePageController {
 
     @FXML
     void showGrades(ActionEvent event) throws SQLException {
-        selectedItems = getClassAndSubject();
+        selectedItems = getClassAndSubject(user);
         setSelectedItems();
 
-        rebootTable(GRADES);
+        try{
+            rebootTable(GRADES);
+        } catch (SQLException e) {
+            System.out.println("Бывает. Ничего страшного");
+        }
+
     }
 
     @FXML
@@ -234,11 +243,11 @@ public class HomePageController {
         //В зависимости от названия нажатой кнопки будет выводится таблица с дз или с замечаниями
         switch (((Button) event.getSource()).getText()) {
             case "Домашнее задание" -> {
-                selectedItems = getClassAndSubject();
+                selectedItems = getClassAndSubject(user);
                 rebootTable(HOMEWORK);
             }
             case "Замечания" -> {
-                selectedItems = getClassAndStudent();
+                selectedItems = getClassAndStudent(user);
                 rebootTable(REPROOFS);
             }
         }
