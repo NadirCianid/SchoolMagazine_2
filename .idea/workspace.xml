@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="45300683-648f-47db-937a-eacff8028b5f" name="Changes" comment="Some bug fixes.">
+    <list default="true" id="45300683-648f-47db-937a-eacff8028b5f" name="Changes" comment="Renamed main class.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SchoolMagazine_2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/SchoolMagazine_2.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/DataController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/DataController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/InsertPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/InsertPageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Staff/Assistant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Staff/Assistant.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +48,7 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "org.intellij.sdk.settings.AppSettingsConfigurable"
+    "settings.editor.selected.configurable": "preferences.pathVariables"
   },
   "keyToStringList": {
     "DatabaseDriversLRU": [
@@ -65,7 +67,7 @@
   </component>
   <component name="RunManager" selected="Application.App">
     <configuration name="App" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="Controllers.TestApplication" />
+      <option name="MAIN_CLASS_NAME" value="Controllers.Application" />
       <module name="SchoolMagazine_2" />
       <option name="VM_PARAMETERS" value="--module-path ${PATH_TO_FX} --add-modules javafx.fxml,javafx.controls,javafx.graphics " />
       <method v="2">
@@ -101,7 +103,10 @@
       <workItem from="1691677509587" duration="1577000" />
       <workItem from="1691680252210" duration="26073000" />
       <workItem from="1692130000412" duration="43613000" />
-      <workItem from="1692942620586" duration="2178000" />
+      <workItem from="1692942620586" duration="2535000" />
+      <workItem from="1693044512995" duration="5000" />
+      <workItem from="1693244742225" duration="261000" />
+      <workItem from="1695844149570" duration="1948000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit. At this point I created Database.">
       <created>1691677972624</created>
@@ -159,7 +164,14 @@
       <option name="project" value="LOCAL" />
       <updated>1692820614760</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Renamed main class.">
+      <created>1692945368040</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1692945368040</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -186,17 +198,11 @@
     <MESSAGE value="Submitting of grades, homework and reproof now works." />
     <MESSAGE value="Grades, homework and reproof submitting now works." />
     <MESSAGE value="Some bug fixes." />
-    <option name="LAST_COMMIT_MESSAGE" value="Some bug fixes." />
+    <MESSAGE value="Renamed main class." />
+    <option name="LAST_COMMIT_MESSAGE" value="Renamed main class." />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Controllers/InsertPageController.java</url>
-          <line>157</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

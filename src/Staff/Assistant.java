@@ -1,6 +1,7 @@
 package Staff;
 
 import Controllers.DataController;
+import Entities.User;
 
 import javax.swing.*;
 import java.sql.SQLException;

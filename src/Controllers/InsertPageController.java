@@ -98,6 +98,12 @@ public class InsertPageController {
         String homeworkText;
         LocalDate deadline = deadlineDatePicker.getValue();
 
+        if(deadline.isBefore(LocalDate.now())) {
+            JOptionPane.showMessageDialog(null, "Неверный дэдлайн. \n" +
+                    "Вы вели прошедшую дату!", " Ошибка", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         try {
             className = classHWComboBox.getValue();
             subject = subjectHWComboBox.getValue();
