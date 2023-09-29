@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="45300683-648f-47db-937a-eacff8028b5f" name="Changes" comment="Fixed deadline bug.">
+    <list default="true" id="45300683-648f-47db-937a-eacff8028b5f" name="Changes" comment="Fixed bug with class selection for students.">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/DataController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/DataController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/HomePageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/HomePageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Staff/Assistant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Staff/Assistant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Staff/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Staff/Test.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,6 +51,9 @@
   "keyToStringList": {
     "DatabaseDriversLRU": [
       "mysql"
+    ],
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "GitIgnore"
     ]
   }
 }]]></component>
@@ -107,7 +107,8 @@
       <workItem from="1692942620586" duration="2535000" />
       <workItem from="1693044512995" duration="5000" />
       <workItem from="1693244742225" duration="261000" />
-      <workItem from="1695844149570" duration="3915000" />
+      <workItem from="1695844149570" duration="4549000" />
+      <workItem from="1696017600249" duration="168000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit. At this point I created Database.">
       <created>1691677972624</created>
@@ -179,7 +180,14 @@
       <option name="project" value="LOCAL" />
       <updated>1695846167872</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Fixed bug with class selection for students.">
+      <created>1695848142618</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1695848142618</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -208,7 +216,8 @@
     <MESSAGE value="Some bug fixes." />
     <MESSAGE value="Renamed main class." />
     <MESSAGE value="Fixed deadline bug." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed deadline bug." />
+    <MESSAGE value="Fixed bug with class selection for students." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed bug with class selection for students." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
