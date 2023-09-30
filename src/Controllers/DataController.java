@@ -85,7 +85,7 @@ public class DataController {
 
     public static void initializeDataBase() throws SQLException {
         String driver = "com.mysql.cj.jdbc.Driver";
-        String url = "jdbc:mysql://localhost:3306/school_magazine?&serverTimezone=UTC";
+        String url = "jdbc:mysql://localhost:3306/financial_assistance?&serverTimezone=UTC";
         String user = "root";
         String password = "root";
         try {

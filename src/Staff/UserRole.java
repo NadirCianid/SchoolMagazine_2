@@ -3,7 +3,7 @@ package Staff;
 public enum UserRole {
 
     STUDENT("students"),
-    TEACHER("teachers");
+    ADMIN("admins");
 
     private final String tableName;
 

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.ToolBar?>
@@ -12,115 +12,84 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="480.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.HomePageController">
+<AnchorPane prefHeight="720.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.HomePageController">
    <children>
-      <SplitPane dividerPositions="0.7728285077951002" prefHeight="480.0" prefWidth="720.0">
-        <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="478.0" prefWidth="548.0">
+      <Label layoutX="32.0" layoutY="28.0" text="Материальная помощь для студентов">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="userLabel" layoutX="274.0" layoutY="686.0" prefHeight="20.0" prefWidth="192.0" text="Студент/админ">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Pane fx:id="adminPane" prefHeight="720.0" prefWidth="480.0" visible="false">
+         <children>
+            <TableView fx:id="adminTableView" layoutX="8.0" layoutY="281.0" prefHeight="318.0" prefWidth="465.0">
+              <columns>
+                <TableColumn fx:id="instituteTC" prefWidth="60.0" text="Институт" />
+                <TableColumn fx:id="specialtyTC" prefWidth="97.0" text="Группа" />
+                  <TableColumn fx:id="studentTC" prefWidth="125.0" text="Студент" />
+                  <TableColumn fx:id="faCategoryTC" prefWidth="182.0" text="Категория мат. помощи" />
+              </columns>
+            </TableView>
+            <Button layoutX="226.0" layoutY="625.0" mnemonicParsing="false" onAction="#openApplication" text="Рассмотреть выбранную заявку">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <VBox layoutX="32.0" layoutY="119.0" prefHeight="150.0" prefWidth="417.0" spacing="10.0">
                <children>
-                  <Pane fx:id="finalGradesPane" prefHeight="478.0" prefWidth="552.0" visible="false">
-                     <children>
-                        <TableView fx:id="finalGradesTableView" layoutY="-1.0" prefHeight="478.0" prefWidth="552.0">
-                          <columns>
-                            <TableColumn fx:id="number" editable="false" prefWidth="28.000000774860382" text="№" />
-                            <TableColumn fx:id="subjectName" editable="false" prefWidth="143.2000389099121" text="Название Предмета" />
-                              <TableColumn fx:id="firstQuarter" editable="false" maxWidth="75.0" prefWidth="143.2000389099121" text="1 Четверть" />
-                              <TableColumn fx:id="secondQuarter" editable="false" maxWidth="75.0" prefWidth="143.2000389099121" text="2 Четверть" />
-                              <TableColumn fx:id="thirdQuarter" editable="false" maxWidth="75.0" prefWidth="143.2000389099121" text="3 Четверть" />
-                              <TableColumn fx:id="fourthQuarter" editable="false" maxWidth="75.0" prefWidth="143.2000389099121" text="4 Четверть" />
-                              <TableColumn fx:id="finalGrade" editable="false" maxWidth="75.0" prefWidth="143.2000389099121" text="Итоговая" />
-                          </columns>
-                        </TableView>
-                     </children></Pane>
-                  <Pane fx:id="gradesPane" prefHeight="478.0" prefWidth="552.0" visible="false">
-                     <children>
-                        <TableView fx:id="gradesTableView" layoutX="-3.0" layoutY="-1.0" prefHeight="433.0" prefWidth="558.0">
-                          <columns>
-                            <TableColumn fx:id="gradeNumber" prefWidth="28.000000715255737" text="№" />
-                              <TableColumn fx:id="student" prefWidth="147.2000389099121" text="Ученик" />
-                            <TableColumn fx:id="date" prefWidth="140.8000030517578" text="Дата" />
-                              <TableColumn fx:id="gradeTeacher" prefWidth="125.60003662109375" text="Учитель" />
-                              <TableColumn fx:id="gradeMark" prefWidth="67.199951171875" text="Балл" />
-                          </columns>
-                        </TableView>
-                     </children></Pane>
-                  <Pane fx:id="homeworkPane" prefHeight="478.0" prefWidth="552.0" visible="false">
-                     <children>
-                        <TableView fx:id="homeworkTableView" prefHeight="425.0" prefWidth="552.0">
-                          <columns>
-                            <TableColumn fx:id="homeworkNumber" prefWidth="25.599976360797882" text="№" />
-                            <TableColumn fx:id="homeworkDeadline" prefWidth="68.79995346069336" text="Дедлайн" />
-                              <TableColumn fx:id="homeworkTeacher" prefWidth="120.79998779296875" text="Учитель" />
-                              <TableColumn fx:id="homeworkBody" prefWidth="332.00001525878906" text="Текст Д/З" />
-                          </columns>
-                        </TableView>
-                     </children></Pane>
-                  <Pane fx:id="reproofsPane" prefHeight="478.0" prefWidth="552.0" visible="false">
-                     <children>
-                        <TableView fx:id="reproofsTableView" prefHeight="425.0" prefWidth="552.0">
-                           <columns>
-                              <TableColumn fx:id="reproofNumber" prefWidth="25.599976360797882" text="№" />
-                              <TableColumn fx:id="reproofTeacher" prefWidth="120.79998779296875" text="Учитель" />
-                              <TableColumn fx:id="reproofBody" prefWidth="404.8000030517578" text="Текст замечания" />
-                           </columns>
-                        </TableView>
-                     </children>
-                  </Pane>
-                  <ToolBar layoutY="430.0" prefHeight="50.0" prefWidth="552.0">
+                  <ToolBar prefHeight="40.0" prefWidth="200.0">
                     <items>
-                      <Button fx:id="gradeButton" mnemonicParsing="false" onAction="#grade" prefHeight="26.0" prefWidth="120.0" text="Выставить оценку" />
-                        <Button fx:id="submitHomeworkButton" layoutX="10.0" layoutY="16.0" mnemonicParsing="false" onAction="#submitHomework" prefHeight="26.0" prefWidth="180.0" text="Выложить домшнее задание" />
-                        <Button fx:id="submitReproofButton" layoutX="153.0" layoutY="16.0" mnemonicParsing="false" onAction="#submitReproof" prefHeight="26.0" prefWidth="150.0" text="Оставить замечание" />
-                        <Button fx:id="rebootButton" layoutX="337.0" layoutY="17.0" mnemonicParsing="false" onAction="#rebootActiveTable" prefHeight="26.0" prefWidth="70.0" text="Обновить" />
+                        <ComboBox fx:id="instituteCB" prefHeight="25.0" prefWidth="177.0" promptText="Институт" />
+                      <Button mnemonicParsing="false" onAction="#filterByInstitute" text="По институту" />
                     </items>
                   </ToolBar>
-               </children></AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="478.0" prefWidth="602.0">
-               <children>
-                  <VBox alignment="TOP_CENTER" maxHeight="478.0" prefHeight="478.0" prefWidth="161.0" spacing="10.0">
-                     <padding>
-                        <Insets bottom="20.0" left="5.0" right="10.0" top="10.0" />
-                     </padding>
-                     <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="56.0" prefWidth="124.0" text="Личный кабинет" textAlignment="CENTER">
-                           <font>
-                              <Font name="Consolas" size="16.0" />
-                           </font>
-                        </Label>
-                        <ToolBar layoutX="23.0" layoutY="187.0" maxWidth="130.0" prefHeight="10.0" prefWidth="130.0" />
-                        <Label text="Текущий пользователь:" />
-                        <ToolBar layoutX="23.0" layoutY="351.0" maxWidth="130.0" prefHeight="25.0" prefWidth="130.0">
-                           <items>
-                              <Label fx:id="userStatusLabel" prefHeight="18.0" prefWidth="115.0" text="Учитель" />
-                           </items>
-                        </ToolBar>
-                        <ToolBar layoutX="23.0" layoutY="312.0" maxWidth="130.0" prefHeight="25.0" prefWidth="130.0">
-                           <items>
-                              <Label fx:id="userNameLabel" prefHeight="18.0" prefWidth="115.0" text="Петр Петров" />
-                           </items>
-                        </ToolBar>
-                        <ToolBar layoutX="23.0" layoutY="271.0" maxWidth="130.0" prefHeight="10.0" prefWidth="130.0" />
-                        <Button fx:id="finalGradesButton" mnemonicParsing="false" onAction="#showFinalGrades" prefWidth="130.0" text="Итоговые оценки" />
-                        <Button fx:id="gradesButton" mnemonicParsing="false" onAction="#showGrades" prefWidth="130.0" text="Оценки" />
-                        <Button fx:id="homeworkButton" mnemonicParsing="false" onAction="#showHomeworkAndReproofs" prefWidth="130.0" text="Домашнее задание" />
-                        <Button fx:id="reproofsButton" mnemonicParsing="false" onAction="#showHomeworkAndReproofs" prefWidth="130.0" text="Замечания" />
-                        <ToolBar maxWidth="130.0" prefHeight="10.0" prefWidth="130.0" />
-                        <Label text="Работаем с:" />
-                        <ToolBar layoutX="23.0" layoutY="292.0" maxWidth="130.0" prefHeight="25.0" prefWidth="130.0">
-                           <items>
-                              <Label fx:id="selectedItem1" prefHeight="18.0" prefWidth="115.0" />
-                           </items>
-                        </ToolBar>
-                        <ToolBar maxWidth="130.0" prefHeight="25.0" prefWidth="130.0">
-                           <items>
-                              <Label fx:id="selectedItem2" prefHeight="18.0" prefWidth="115.0" />
-                           </items>
-                        </ToolBar>
-                     </children>
-                  </VBox>
+                  <ToolBar prefHeight="40.0" prefWidth="200.0">
+                     <items>
+                        <ComboBox fx:id="specialtyCB" prefHeight="25.0" prefWidth="177.0" promptText="Номер группы" />
+                        <Button mnemonicParsing="false" onAction="#filterBySpecialty" prefHeight="25.0" prefWidth="89.0" text="По группе" />
+                     </items>
+                  </ToolBar>
+                  <ToolBar prefHeight="40.0" prefWidth="200.0">
+                     <items>
+                        <ComboBox fx:id="categoryCB" prefHeight="25.0" prefWidth="178.0" promptText="Категория мат. помощи" />
+                        <Button mnemonicParsing="false" onAction="#filterByCategory" prefHeight="25.0" prefWidth="169.0" text="По категории мат. помощи" />
+                     </items>
+                  </ToolBar>
                </children>
-            </AnchorPane>
-        </items>
-      </SplitPane>
+            </VBox>
+            <Label layoutX="203.0" layoutY="89.0" text="Фильтр">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane fx:id="studentPane" prefHeight="720.0" prefWidth="480.0" visible="false">
+         <children>
+            <TableView fx:id="studentTableView" layoutX="45.0" layoutY="173.0" prefHeight="431.0" prefWidth="390.0">
+              <columns>
+                <TableColumn fx:id="faCategoryStudentTC" prefWidth="75.0" text="Категория" />
+                <TableColumn fx:id="applicationStatusTC" prefWidth="53.0" text="Статус" />
+                  <TableColumn fx:id="comentTC" prefWidth="196.0" text="Комментарий" />
+                  <TableColumn fx:id="paymentTC" prefWidth="65.0" text="Выплата" />
+              </columns>
+            </TableView>
+            <Button layoutX="140.0" layoutY="628.0" mnemonicParsing="false" onAction="#sendApplication" text="Подать новую заявку">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Label layoutX="127.0" layoutY="130.0" text="Статус ваших заявок">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Separator layoutY="81.0" prefHeight="20.0" prefWidth="480.0" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

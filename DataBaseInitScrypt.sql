@@ -1,126 +1,130 @@
-use school_magazine;
+-- create database financial_assistance;
 
-drop table teachers_classes;
-drop table homeworks;
-drop table marks;
-drop table reproofs;
-drop table teachers;
+use financial_assistance;
+
+drop table FA_applications;
+drop table required_documents_list;
 drop table students;
-drop table classes;
-drop table subjects;
+drop table specialties;
+drop table institutes;
+drop table admins;
+drop table required_documents;
+drop table FA_categories;
 
 
 
-create table classes (
-class_name varchar(10) primary key
- );
+create table institutes (
+id int primary key auto_increment,
+name varchar(40) not null);
 
-create table subjects (
-subject_id int primary key auto_increment,
-subject_name varchar(20) not null);
+create table specialties (
+id int primary key auto_increment,
+name varchar(40) not null,
+institute_id int not null,
+constraint institute_id_fk foreign key (institute_id)
+references institutes (id));
 
-create table teachers (
-teacher_id int primary key auto_increment,
-fio varchar(40) not null,
+create table admins (
+id int primary key auto_increment,
+name varchar(40) not null,
 mail varchar(50) not null unique,
-pswd varchar(20) not null,
-personal_info varchar(100) );
+pswd varchar(20) not null);
 
-create table teachers_classes (
-record_id int primary key auto_increment,
-teacher_id int not null,
-class_name varchar(10) not null,
-subject_id int not null,
-constraint teachers_classes_1_fk foreign key (class_name)
-references classes (class_name),
-constraint teachers_classes_2_fk foreign key (subject_id)
-references subjects (subject_id),
-constraint teachers_classes_3_fk foreign key (teacher_id)
-references teachers (teacher_id),
-constraint teachers_classes_unique unique (class_name, subject_id, teacher_id)
-);
+CREATE UNIQUE INDEX UQ_admins_mail ON admins (mail);
 
 create table students (
-student_id int  primary key AUTO_INCREMENT ,
-fio varchar(40) not null,
+id int  primary key AUTO_INCREMENT ,
+name varchar(40) not null,
 mail varchar(50) not null unique,
 pswd varchar(20) not null,
-class_name varchar(10) not null,
-personal_info varchar(100),
-constraint student_fk foreign key (class_name)
-references classes (class_name));
+specialty_id int not null,
+constraint student_fk foreign key (specialty_id)
+references specialties (id));
 
 CREATE UNIQUE INDEX UQ_students_mail ON students (mail);
 
-create table homeworks (
-homework_id int primary key auto_increment,
-class_name varchar(10) not null,
-subject_id int not null,
-teacher_id int not null,
-deadline date not null,
-body varchar(255) not null,
-constraint homeworks_1_fk foreign key (class_name)
-references classes (class_name),
-constraint homeworks_2_fk foreign key (subject_id)
-references subjects (subject_id),
-constraint homeworks_3_fk foreign key (teacher_id)
-references teachers (teacher_id));
+create table required_documents (
+id int primary key auto_increment,
+title varchar(100) not null,
+description varchar(500) not null);
 
-create table marks (
-mark_id int primary key auto_increment,
+create table FA_categories (
+id int primary key auto_increment,
+title varchar(100) not null,
+description varchar(500) not null,
+payment_amount int not null);
+
+create table required_documents_list (
+id int primary key auto_increment,
+required_document_id int not null,
+constraint required_document_fk foreign key (required_document_id)
+references required_documents (id), 
+FA_category_id int not null,
+constraint FA_category_fk foreign key (FA_category_id)
+references FA_categories (id)
+);
+
+create table FA_applications (
+id int primary key auto_increment,
+conf_doc_link varchar(200) not null,
+application_status varchar(50) not null,
+admin_coment varchar(500) not null,
+payment_amount int not null,
+admin_id int not null,
+constraint admin_fk foreign key (admin_id)
+references admins (id), 
 student_id int not null,
-teacher_id int not null,
-subject_id int not null,
-mark int not null,
-date datetime not null,
-constraint marks_1_fk foreign key (subject_id)
-references subjects (subject_id),
-constraint marks_2_fk foreign key (teacher_id)
-references teachers (teacher_id),
-constraint marks_3_fk foreign key (student_id)
-references students (student_id) );
-
-create table reproofs (
-reproof_id int primary key auto_increment,
-student_id int not null,
-teacher_id int not null,
-text varchar(255) not null,
-constraint reproofs_1_fk foreign key (teacher_id)
-references teachers (teacher_id),
-constraint reproofs_2_fk foreign key (student_id)
-references students (student_id) );
+constraint FA_student_fk foreign key (student_id)
+references students (id), 
+FA_category_id int not null,
+constraint FA_cat_fk foreign key (FA_category_id)
+references FA_categories (id));
 
 
-insert into classes (class_name)
-	values ("5 A"), ("5 B"), ("6 A"), ("6 B");
+insert into institutes (name) values ('ИКНК'), ('ИПМЭиТ'), ('Физ-мех');
 
-insert into subjects (subject_name)
-		values ("Информатика"), ("Математика");
+insert into specialties (name, institute_id) 
+values ('5130902/00201', 1), 
+('5132703/00101', 1), 
+('5130902/00202', 1),
+('3733802/00301', 2),
+('3733802/02602', 2),
+('3733806/00401', 2),
+('5030102/30001', 3),
+('5031503/30003', 3),
+('5030103/30002', 3);
 
-insert into teachers (fio, mail, pswd, personal_info)
-	values ("Нестеров Сергей А.", "nesterov@spbstu.ru", "1234", "Лучший!");
+insert into students (name, mail, pswd, specialty_id)
+values ('Тюрина Татьяна Владимирована', 'tiurina.t@edu.spbstu.ru', '1111', 1),
+('Шкурская Елизавета Дмитриевна', 'shkurskaya.e@edu.spbstu.ru', '1111', 2),
+('Косенкова Анна Алексеевна', 'kosenkova.a@edu.spbstu.ru', '1111', 3),
+('Иванов Иван Иванович', 'ivanov.i@edu.spbstu.ru', '1111', 4),
+('Петров Петр Петрович', 'petrov.p@edu.spbstu.ru', '1111', 7);
 
-insert into teachers_classes (teacher_id, class_name, subject_id)
-	values (1, "5 A", 1), (1, "5 B", 1), (1, "6 A", 1), (1, "6 B", 1);
+insert into admins (name, mail, pswd) 
+values ('Сергеев Сергей Сергеевич', 'sergeev@spbstu.ru', '1111'),
+('Соколов Олег Олегович', 'sokolov.oo@sbpstu.ru', '1111');
 
-insert into students  (fio, mail, pswd, class_name, personal_info)
-	values ("Колесникова Наталья В.", "kolesnikova@edu.spbstu.ru", "1234", "6 A", "Ж") ;
+insert into required_documents (title, description)
+values ('Справки', 'Копии справок, выданных органами местного самоуправления'), 
+('Пояснительная записка', 'Сопроводительное письмо о чрезвычайном обстоятельстве'),
+('Свидетельстово смерти', 'Копия свидетельства о смерти члена Профсоюза, члена его семьи'),
+('Свидетельство о рождении', 'Свидетельство о рождении или копия решения суда об усыновлении'),
+('Документы, подтверждающие родство', 'свидетельство о рождении, смене фамилии, браке')  ;
 
-insert into marks (student_id, teacher_id, subject_id, mark, date)
-	values (1, 1, 1, 10, "10.10.2010"), (1,1,1,7,"11.09.2010"),
-    (1, 1, 1, 5, "10.11.2010"), (1,1,1,7,"11.12.2010"),
-    (1, 1, 1, 8, "10.1.2010"), (1,1,1,7,"11.2.2010"),
-    (1, 1, 1, 8, "10.1.2010"), (1,1,1,7,"11.2.2010");
+insert into FA_categories (title, description, payment_amount)
+values ('В связи с чрезвычайными обстоятельствами', 'Чрезвычайные могут быть разными, поэтому каждый случай рассматривается индивидуально.', 23700),
+('В случае смерти члена Профсоюза, члена его семьи ', 'Членами семьи считаются: родители, супруг(а) и дети', 23700),
+('В связи с рождением (усыновлением) ребенка', '-', 16000);
 
-insert into marks (student_id, teacher_id, subject_id, mark, date)
-	values (1, 1, 2, 10, "10.10.2010"), (1,1,2,7,"11.09.2010"),
-    (1, 1, 2, 5, "10.11.2010"), (1,1,2,7,"11.12.2010"),
-    (1, 1, 2, 8, "10.1.2010"), (1,1,2,7,"11.2.2010");
+insert into required_documents_list (required_document_id, FA_category_id) 
+values (2, 1),
+(1, 1),
+(5, 2),
+(3, 2);
 
-insert into homeworks (class_name, subject_id, teacher_id, deadline, body)
-	values ("6 A", 1, 1, "11.2.2010", "Написать калькулятор на Java");
 
-insert into reproofs (student_id, teacher_id, text)
-	values (1, 1, "Слишком классно прогает!");
+
+
 
 

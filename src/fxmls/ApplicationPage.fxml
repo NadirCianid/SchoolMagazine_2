@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.InsertPageController">
+   <children>
+      <Pane fx:id="adminPane" prefHeight="480.0" prefWidth="480.0" visible="false">
+         <children>
+            <Label layoutX="114.0" layoutY="29.0" text="Рассмотрение заявки студента">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <ToolBar layoutX="25.0" layoutY="79.0" prefHeight="40.0" prefWidth="431.0">
+               <items>
+                  <Label prefHeight="19.0" prefWidth="135.0" text="Ссылка на документы">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+                  <Separator orientation="VERTICAL" prefHeight="20.0" />
+                  <Hyperlink fx:id="confirmDocsLink" alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="264.0" text="Hyperlink" />
+               </items>
+            </ToolBar>
+            <TextFlow layoutX="25.0" layoutY="147.0" lineSpacing="1.0" prefHeight="136.0" prefWidth="431.0" textAlignment="CENTER">
+               <children>
+                  <Text fx:id="faCategoryText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+               </children>
+            </TextFlow>
+            <TextArea fx:id="adminCommentTextArea" layoutX="25.0" layoutY="303.0" prefHeight="103.0" prefWidth="431.0" promptText="Заключение рассмотрения" />
+            <TextField fx:id="paymentAmountTextField" layoutX="25.0" layoutY="428.0" prefHeight="25.0" prefWidth="113.0" promptText="Размер выплаты" />
+            <Button layoutX="341.0" layoutY="438.0" mnemonicParsing="false" onAction="#sendConclusion" text="Отправить ответ">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Separator layoutX="23.0" layoutY="128.0" prefHeight="19.0" prefWidth="437.0" />
+            <Separator layoutX="23.0" layoutY="283.0" prefHeight="19.0" prefWidth="437.0" />
+            <Separator layoutX="22.0" layoutY="406.0" prefHeight="19.0" prefWidth="437.0" />
+            <ComboBox fx:id="statusComboBox" layoutX="158.0" layoutY="428.0" prefHeight="25.0" prefWidth="135.0" promptText="Статус" />
+         </children>
+      </Pane>
+      <Pane fx:id="studentPane" prefHeight="480.0" prefWidth="480.0" visible="false">
+         <children>
+            <Label layoutX="67.0" layoutY="25.0" text="Подача заявки на материальную помощь">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TableView fx:id="faCategoriesTableView" layoutX="40.0" layoutY="79.0" prefHeight="200.0" prefWidth="400.0">
+              <columns>
+                <TableColumn fx:id="categoryTC" prefWidth="103.0" text="Категория" />
+                <TableColumn fx:id="descriptionTC" prefWidth="190.0" text="Описание" />
+                  <TableColumn fx:id="paymentAmountTC" prefWidth="106.0" text="Размер выплаты" />
+              </columns>
+            </TableView>
+            <TextField fx:id="confDocsLink" layoutX="63.0" layoutY="330.0" prefHeight="25.0" prefWidth="355.0" promptText="Ссылка на облачное хранилище" />
+            <Label layoutX="95.0" layoutY="305.0" text="Загрузите ваши документы на облачное хранилище." />
+            <Button layoutX="174.0" layoutY="414.0" mnemonicParsing="false" onAction="#sendRequest" text="Отправить заявку">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

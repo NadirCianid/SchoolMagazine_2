@@ -256,7 +256,7 @@ public class HomePageController {
     }
 
     private void showInsertPage(ActionEvent event, String submitType) throws IOException, SQLException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("..//fxmls//InsertPage.fxml")));
+        FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("..//fxmls//ApplicationPage.fxml")));
 
         Parent root = fxmlLoader.load();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
