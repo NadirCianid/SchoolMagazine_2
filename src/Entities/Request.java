@@ -1,12 +1,7 @@
 package Entities;
 
-import Controllers.DataController;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Locale;
-
 public class Request {
+    private int id;
     private String studentName;
     private String studentInstitute;
     private String studentSpecialty;
@@ -63,8 +58,12 @@ public class Request {
         return admin;
     }
 
+    public int getId() {
+        return id;
+    }
 
-    public Request(String confDocLink, String faCategory, String fillingDate) {
+    public Request(int id, String confDocLink, String faCategory, String fillingDate) {
+        this.id = id;
         this.confDocLink = confDocLink;
         this.faCategory = faCategory;
         this.fillingDate = fillingDate;

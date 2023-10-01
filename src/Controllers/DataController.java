@@ -6,7 +6,6 @@ import javafx.collections.ObservableList;
 
 import java.sql.*;
 import java.sql.Date;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
@@ -29,6 +28,8 @@ public class DataController {
     private static PreparedStatement selectReqDocs;
 
     private static PreparedStatement insertRequest;
+
+    private static PreparedStatement updateRequest;
 
     public static boolean isDataValid(String login, String pswd) throws SQLException {
         //Настройка и проверка PreparedStatement учетной записи среди учеников
@@ -110,6 +111,9 @@ public class DataController {
             insertRequest = conn.prepareStatement("insert into fa_requests (filling_date, conf_doc_link, request_status, student_id, fa_category_id )\n" +
                     "values (now(), ?, 'На рассмотрении', (select id from students where mail = ?), (select id from fa_categories where title = ?));");
 
+            updateRequest = conn.prepareStatement("update fa_requests\n" +
+                    "set response_date = now(), request_status = ?, admin_coment = ?, payment_amount = ?, admin_id = (select id from admins where mail = ?)\n" +
+                    "where id = ?;");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -132,23 +136,25 @@ public class DataController {
     }
 
     private static void getRequestsForAdminTable(User user, ObservableList<Request> requestsList) throws SQLException {
-        resultSet = selectRequestsForAdmin.executeQuery("select conf_doc_link, title, students.name, institutes.name, specialties.name, filling_date\n" +
+        resultSet = selectRequestsForAdmin.executeQuery("select fa_requests.id, conf_doc_link, title, students.name, institutes.name, specialties.name, filling_date\n" +
                 "from (((fa_requests join fa_categories  on fa_requests.FA_category_id = fa_categories.id) \n" +
                 "join students on fa_requests.student_id = students.id) \n" +
                 "join specialties on students.specialty_id = specialties.id)\n" +
-                "join institutes on specialties.institute_id = institutes.id; ");
+                "join institutes on specialties.institute_id = institutes.id\n" +
+                "where request_status = 'На рассмотрении' or request_status = 'На дополнительном рассмотрении';  ");
 
         while (resultSet.next()) {
-            String confDocLink = resultSet.getString(1);
-            String categoryTitle = resultSet.getString(2);
-            String studentName = resultSet.getString(3);
-            String institute = resultSet.getString(4);
-            String specialty = resultSet.getString(5);
-            String fillingDate = resultSet.getDate(6)
+            int id = resultSet.getInt(1);
+            String confDocLink = resultSet.getString(2);
+            String categoryTitle = resultSet.getString(3);
+            String studentName = resultSet.getString(4);
+            String institute = resultSet.getString(5);
+            String specialty = resultSet.getString(6);
+            String fillingDate = resultSet.getDate(7)
                     .toLocalDate()
                     .format(DateTimeFormatter.ofPattern("EEEE, dd.MM.yyyy", Locale.getDefault()));
 
-            Request newRequest = new Request(confDocLink, categoryTitle, fillingDate);
+            Request newRequest = new Request(id, confDocLink, categoryTitle, fillingDate);
 
             newRequest.setStudentParams(studentName, institute, specialty);
 
@@ -233,5 +239,15 @@ public class DataController {
         getReqDocs(faCategory).forEach(reqDoc -> reqDocs.append("-").append(reqDoc).append(";\n"));
 
         return reqDocs.toString();
+    }
+
+    public static void updateRequest(int paymentAmount, String adminComment, String newStatus, int id) throws SQLException {
+        updateRequest.setString(1, newStatus);
+        updateRequest.setString(2, adminComment);
+        updateRequest.setInt(3, paymentAmount);
+        updateRequest.setString(4, Application.user.getLogin());
+        updateRequest.setInt(5, id);
+
+        updateRequest.executeUpdate();
     }
 }

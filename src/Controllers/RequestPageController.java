@@ -25,6 +25,7 @@ import static Controllers.DataController.getFACategories;
 import static Controllers.Application.user;
 
 public class RequestPageController {
+    private static Request selectedByAdminRequest;
     @FXML
     private TextArea adminCommentTextArea;
 
@@ -63,6 +64,34 @@ public class RequestPageController {
 
     @FXML
     void sendConclusion(ActionEvent event) throws SQLException, IOException {
+        int paymentAmount;
+        try {
+            paymentAmount = Integer.parseInt(paymentAmountTextField.getText());
+        } catch (NumberFormatException e) {
+            paymentAmountTextField.clear();
+            JOptionPane.showMessageDialog(null, "Ошибка ввода \n" +
+                    "Необходимо ввести натуральное значение выплаты.", " Ошибка", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        String adminComment = adminCommentTextArea.getText();
+        String newStatus = statusComboBox.getSelectionModel().getSelectedItem();
+
+        if(newStatus == null) {
+            JOptionPane.showMessageDialog(null, "Ошибка ввода \n" +
+                    "Необходимо выбрать новый статус заявки.", " Ошибка", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        try {
+            DataController.updateRequest(paymentAmount, adminComment, newStatus, selectedByAdminRequest.getId());
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Ошибка базы данных \n" +
+                    "Произошла непредвиденная ошибка. \n Обратитесть к администратору приложения за подробностями.", " Ошибка", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+
         toHomePage(event);
     }
 
@@ -119,6 +148,8 @@ public class RequestPageController {
         statuses.add("Мат. помощь не одобрена");
 
         statusComboBox.setItems(statuses);
+
+        selectedByAdminRequest = selectedRequest;
     }
 
     private void fillFACategoriesTableView() throws SQLException {

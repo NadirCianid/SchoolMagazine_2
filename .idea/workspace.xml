@@ -1,27 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="45300683-648f-47db-937a-eacff8028b5f" name="Changes" comment="Changed interface and data base + began to change controllers.">
-      <change afterPath="$PROJECT_DIR$/src/Entities/FACategory.java" afterDir="false" />
+    <list default="true" id="45300683-648f-47db-937a-eacff8028b5f" name="Changes" comment="Database updated. Code refactored for new tasks.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataBaseInitScrypt.sql" beforeDir="false" afterPath="$PROJECT_DIR$/DataBaseInitScrypt.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controllers/DataController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/DataController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/HomePageController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/InsertPageController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/LogInController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/LogInController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/NewHomePageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/NewHomePageController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controllers/RequestPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/RequestPageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entities/HomeworkOrReproof.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entities/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/Request.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entities/SubjectFinalGrade.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entities/SubjectGrade.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Staff/Assistant.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Staff/TableType.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Staff/Test.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Staff/UserRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/UserRole.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fxmls/ApplicationPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxmls/RequestPage.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fxmls/HomePage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxmls/HomePage.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,7 +115,7 @@
       <workItem from="1693044512995" duration="5000" />
       <workItem from="1693244742225" duration="261000" />
       <workItem from="1695844149570" duration="4549000" />
-      <workItem from="1696017600249" duration="33413000" />
+      <workItem from="1696017600249" duration="36558000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit. At this point I created Database.">
       <created>1691677972624</created>
@@ -224,7 +208,14 @@
       <option name="project" value="LOCAL" />
       <updated>1696100147916</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Database updated. Code refactored for new tasks.">
+      <created>1696182014986</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1696182014986</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -268,7 +259,8 @@
     <MESSAGE value="Fixed bug with class selection for students." />
     <MESSAGE value=".gitignore changed" />
     <MESSAGE value="Changed interface and data base + began to change controllers." />
-    <option name="LAST_COMMIT_MESSAGE" value="Changed interface and data base + began to change controllers." />
+    <MESSAGE value="Database updated. Code refactored for new tasks." />
+    <option name="LAST_COMMIT_MESSAGE" value="Database updated. Code refactored for new tasks." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
