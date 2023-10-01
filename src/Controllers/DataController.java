@@ -1,8 +1,6 @@
 package Controllers;
 
-import Entities.HomeworkOrReproof;
-import Entities.SubjectFinalGrade;
-import Entities.SubjectGrade;
+import Entities.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -18,22 +16,19 @@ public class DataController {
     private static PreparedStatement loginStudentsCheckPS;
     private static PreparedStatement loginTeachersCheckPS;
 
-    private static PreparedStatement selectTeachersFioPS;
+    private static PreparedStatement selectAdminNamePS;
     private static PreparedStatement selectStudentsFioPS;
 
-    private static Statement selectClasses;
-    private static PreparedStatement selectStudentClass;
-    private static PreparedStatement selectStudentFios;
 
-    private static PreparedStatement selectFinalGrades;
-    private static PreparedStatement selectGrades;
-    private static PreparedStatement selectHomework;
-    private static PreparedStatement selectReproofs;
+    // Новые поля
+    private static PreparedStatement selectRequests;
+    private static Statement selectRequestsForAdmin;
 
-    private static PreparedStatement insertGrade;
-    private static PreparedStatement insertHomework;
-    private static PreparedStatement insertReproof;
 
+    private static Statement selectFACategories;
+    private static PreparedStatement selectReqDocs;
+
+    private static PreparedStatement insertRequest;
 
     public static boolean isDataValid(String login, String pswd) throws SQLException {
         //Настройка и проверка PreparedStatement учетной записи среди учеников
@@ -62,10 +57,10 @@ public class DataController {
         String name2;    //name from students table
 
         //Настройка PreparedStatement для получения имени пользователя
-        selectTeachersFioPS.setString(1, login);
+        selectAdminNamePS.setString(1, login);
         selectStudentsFioPS.setString(1, login);
 
-        resultSet = selectTeachersFioPS.executeQuery();
+        resultSet = selectAdminNamePS.executeQuery();
         if(!resultSet.next()) {
             name1 = "";
         } else {
@@ -96,220 +91,147 @@ public class DataController {
                     "FROM students WHERE mail = ?  AND pswd = ?");
 
             loginTeachersCheckPS = conn.prepareStatement("SELECT CASE WHEN COUNT(*) > 0 THEN 1 ELSE 0 END\n" +
-                    "FROM teachers WHERE mail = ?  AND pswd = ?");
+                    "FROM admins WHERE mail = ?  AND pswd = ?");
 
-            selectTeachersFioPS = conn.prepareStatement("select fio from teachers where mail = ?");
-            selectStudentsFioPS = conn.prepareStatement("select fio from students  where mail = ?");
+            selectAdminNamePS = conn.prepareStatement("select name from admins where mail = ?");
+            selectStudentsFioPS = conn.prepareStatement("select name from students  where mail = ?");
 
-            selectClasses = conn.createStatement();
-            selectStudentClass = conn.prepareStatement("select class_name from students where fio = ?");
-            selectStudentFios = conn.prepareStatement("select fio from students where class_name = ?");
+            selectRequests = conn.prepareStatement("select fa_c.title, admin_coment, request_status, filling_date, response_date, fa_q.payment_amount \n" +
+                    "from fa_requests as fa_q join fa_categories as fa_c on fa_q.FA_category_id = fa_c.id\n" +
+                    "where student_id = (select id from students where mail = ?); ");
 
-            selectFinalGrades = conn.prepareStatement("SELECT subject_name,\n" +
-                    "    CASE \n" +
-                    "        WHEN EXTRACT(MONTH FROM date) IN (9, 10) THEN 1  -- Первая четверть\n" +
-                    "        WHEN EXTRACT(MONTH FROM date) IN (11, 12) THEN 2   -- Вторая четверть\n" +
-                    "        WHEN EXTRACT(MONTH FROM date) IN (1, 2, 3) THEN 3    -- Третья четверть\n" +
-                    "        WHEN EXTRACT(MONTH FROM date) IN (4, 5) THEN 4    -- Четвертая четверть\n" +
-                    "    END AS номер_четверти,\n" +
-                    "    AVG(mark) AS средняя_оценка\n" +
-                    "FROM ( marks join students) join subjects \n" +
-                    "where fio = ?" +
-                    "GROUP BY subject_name, номер_четверти;");
+            selectRequestsForAdmin = conn.createStatement();
 
-            selectGrades = conn.prepareStatement("select students.fio, date, teachers.fio, mark " +
-                    "from (((marks join students) join teachers) join subjects)\n" +
-                    "where subject_name = ?" +
-                    "and students.class_name = ?");
+            selectFACategories = conn.createStatement();
+            selectReqDocs = conn.prepareStatement("select rd.description from (required_documents_list as rdc join required_documents as rd on rdc.required_document_id = rd.id)\n" +
+                    "join fa_categories on rdc.fa_category_id = fa_categories.id\n" +
+                    "where title = ?;");
 
-            selectHomework = conn.prepareStatement("select deadline, teachers.fio, body , subject_id\n" +
-                    "                    from (homeworks join teachers)\n" +
-                    "                    where class_name = ? \n" +
-                    "                    and subject_id = (select subject_id from subjects where subject_name = ?);");
+            insertRequest = conn.prepareStatement("insert into fa_requests (filling_date, conf_doc_link, request_status, student_id, fa_category_id )\n" +
+                    "values (now(), ?, 'На рассмотрении', (select id from students where mail = ?), (select id from fa_categories where title = ?));");
 
-            selectReproofs = conn.prepareStatement("select teachers.fio, text \n" +
-                    "from ((reproofs join teachers) join students) \n" +
-                    "where students.fio = ?");
-
-            insertGrade = conn.prepareStatement("insert into marks (student_id, teacher_id, subject_id, mark, date)\n" +
-                    "\tvalues ((select student_id from students where fio = ?)\n" +
-                    "\t\t  , (select teacher_id from teachers where fio = ?)\n" +
-                    "          , (select subject_id from subjects where subject_name = ?), ?, current_date())");
-
-            insertHomework = conn.prepareStatement("insert into homeworks (class_name, subject_id, teacher_id, deadline, body) \n" +
-                    "\tvalues (?\n" +
-                    "    , (select subject_id from subjects where subject_name = ?)\n" +
-                    "    , (select teacher_id from teachers where fio = ?)\n" +
-                    "    , ?, ?);");
-
-            insertReproof = conn.prepareStatement("insert into reproofs (student_id, teacher_id, text) \n" +
-                    "\tvalues ((select student_id from students where fio = ?)\n" +
-                    "    , (select teacher_id from teachers where fio = ?), ?);");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public static ObservableList<String> getClassesNames() throws SQLException {
-        ObservableList<String> classesNames = FXCollections.observableArrayList();
 
-        resultSet = selectClasses.executeQuery("select class_name from classes;");
+    public static ObservableList<Request> getRequests(User user) throws SQLException {
+        ObservableList<Request> requestsList = FXCollections.observableArrayList();
 
-        while (resultSet.next()) {
-            classesNames.add(resultSet.getString(1));
+        switch (user.getRole()) {
+            case ADMIN -> {
+                getRequestsForAdminTable(user, requestsList);
+            }
+            case STUDENT -> {
+                getRequestsForStudentTable(user, requestsList);
+            }
         }
 
-        return classesNames;
+        return requestsList;
     }
 
-    public static ObservableList<String> getStudentsFios(String selectedClass) throws SQLException {
-        ObservableList<String> studentsFios = FXCollections.observableArrayList();
-
-        selectStudentFios.setString(1, selectedClass);
-        resultSet = selectStudentFios.executeQuery();
-
-        while (resultSet.next()) {
-            studentsFios.add(resultSet.getString(1));
-        }
-
-        return studentsFios;
-    }
-
-    public static ObservableList<SubjectFinalGrade> getSubjectFinalGrades(String studentName) throws SQLException {
-        ObservableList<SubjectFinalGrade> subjectFinalGrades = FXCollections.observableArrayList();
-
-        //Мапа заполняется  по принципу: если есть ключ, то добавляем инфу в значение, а если нет, то добавляем новую пару.
-        Map<String, SubjectFinalGrade> subjectFinalGradeMap = new HashMap<>();
-
-        selectFinalGrades.setString(1, studentName);
-        resultSet = selectFinalGrades.executeQuery();
+    private static void getRequestsForAdminTable(User user, ObservableList<Request> requestsList) throws SQLException {
+        resultSet = selectRequestsForAdmin.executeQuery("select conf_doc_link, title, students.name, institutes.name, specialties.name, filling_date\n" +
+                "from (((fa_requests join fa_categories  on fa_requests.FA_category_id = fa_categories.id) \n" +
+                "join students on fa_requests.student_id = students.id) \n" +
+                "join specialties on students.specialty_id = specialties.id)\n" +
+                "join institutes on specialties.institute_id = institutes.id; ");
 
         while (resultSet.next()) {
-             String subjectName = resultSet.getString(1);
-             int quarterNumber = resultSet.getInt(2);
-             float quarterMark = resultSet.getFloat(3);
-
-             if(subjectFinalGradeMap.containsKey(subjectName)) {
-                 subjectFinalGradeMap.get(subjectName).addQuarterMark(quarterNumber, quarterMark);
-             } else {
-                 subjectFinalGradeMap.put(subjectName, new SubjectFinalGrade(subjectName, quarterNumber, quarterMark));
-             }
-        }
-
-        subjectFinalGrades.addAll(subjectFinalGradeMap.values());
-        subjectFinalGrades.sort(Comparator.comparingInt(SubjectFinalGrade::getNumber));
-
-        return subjectFinalGrades;
-    }
-
-    public static ObservableList<String> getSubjectNames() throws SQLException {
-        ObservableList<String> subjectNames = FXCollections.observableArrayList();
-
-        resultSet = selectClasses.executeQuery("select subject_name from subjects;");
-
-        while (resultSet.next()) {
-            subjectNames.add(resultSet.getString(1));
-        }
-
-        return subjectNames;
-    }
-
-    public static ObservableList<SubjectGrade> getSubjectGrades(String[] selectedItems) throws SQLException {
-        ObservableList<SubjectGrade> subjectGrades = FXCollections.observableArrayList();
-
-        selectGrades.setString(1, selectedItems[1]);
-        selectGrades.setString(2, selectedItems[0]);
-        resultSet = selectGrades.executeQuery();
-
-
-        while (resultSet.next()) {
-            String studentName = resultSet.getString(1);
-            String date = resultSet.getDate(2)
-                    .toLocalDate()
-                    .format(DateTimeFormatter.ofPattern("EEEE, dd.MM.yyyy", Locale.getDefault()));
-            String teacher = resultSet.getString(3);
-            int mark = resultSet.getInt(4);
-
-            subjectGrades.add(new SubjectGrade(studentName, date, teacher, mark));
-        }
-
-        return subjectGrades;
-    }
-
-    public static ObservableList<HomeworkOrReproof> getHomework(String[] selectedItems) throws SQLException {
-        ObservableList<HomeworkOrReproof> homeworkList = FXCollections.observableArrayList();
-
-        selectHomework.setString(1, selectedItems[0]);
-        selectHomework.setString(2, selectedItems[1]);
-        resultSet = selectHomework.executeQuery();
-
-
-        while (resultSet.next()) {
-            String deadline = resultSet.getDate(1)
+            String confDocLink = resultSet.getString(1);
+            String categoryTitle = resultSet.getString(2);
+            String studentName = resultSet.getString(3);
+            String institute = resultSet.getString(4);
+            String specialty = resultSet.getString(5);
+            String fillingDate = resultSet.getDate(6)
                     .toLocalDate()
                     .format(DateTimeFormatter.ofPattern("EEEE, dd.MM.yyyy", Locale.getDefault()));
 
-            String teacher = resultSet.getString(2);
-            String body = resultSet.getString(3);
+            Request newRequest = new Request(confDocLink, categoryTitle, fillingDate);
 
+            newRequest.setStudentParams(studentName, institute, specialty);
 
-            homeworkList.add(new HomeworkOrReproof(deadline, teacher, body));
+            requestsList.add(newRequest);
         }
-
-        return homeworkList;
     }
 
-    public static ObservableList<HomeworkOrReproof> getReproofs(String selectedStudent) throws SQLException {
-        ObservableList<HomeworkOrReproof> reproofsList = FXCollections.observableArrayList();
-
-        selectReproofs.setString(1, selectedStudent);
-        resultSet = selectReproofs.executeQuery();
+    private static void getRequestsForStudentTable(User user, ObservableList<Request> requestsList) throws SQLException {
+        selectRequests.setString(1, user.getLogin());
+        resultSet = selectRequests.executeQuery();
 
 
         while (resultSet.next()) {
-            String teacher = resultSet.getString(1);
-            String body = resultSet.getString(2);
+            String title = resultSet.getString(1);
+            String comment = resultSet.getString(2);
+            String status = resultSet.getString(3);
+            String fillingDate = resultSet.getDate(4)
+                    .toLocalDate()
+                    .format(DateTimeFormatter.ofPattern("EEEE, dd.MM.yyyy", Locale.getDefault()));
+
+            Date responseDate = resultSet.getDate(5);
+            String responseDateString = "";
+            if (responseDate != null) {
+                responseDateString = responseDate.toLocalDate()
+                        .format(DateTimeFormatter.ofPattern("EEEE, dd.MM.yyyy", Locale.getDefault()));
+            }
+
+            String payment = resultSet.getString(6);
 
 
-            reproofsList.add(new HomeworkOrReproof("", teacher, body));
+            requestsList.add(new Request(title, comment, status, fillingDate, responseDateString, payment));
+        }
+    }
+
+    public static ObservableList<FACategory>getFACategories() throws SQLException {
+        ObservableList<FACategory> faCategories = FXCollections.observableArrayList();
+
+        resultSet = selectFACategories.executeQuery("select title, payment_amount from fa_categories;");
+
+        while (resultSet.next()) {
+            ArrayList<String> reqDocs = getReqDocs(resultSet.getString(1));
+
+            int index = 0;
+
+            faCategories.add(new FACategory(resultSet.getString(1), reqDocs.get(index), resultSet.getString(2)));
+
+            while (index < reqDocs.size()-1) {
+                index++;
+                faCategories.add(new FACategory("", reqDocs.get(index), ""));
+            }
+            faCategories.add(new FACategory("", "", ""));
         }
 
-        return reproofsList;
+        return faCategories;
     }
 
-    public static void insertGrade(String student, String teacher, String subject, int grade) throws SQLException {
-        insertGrade.setString(1, student);
-        insertGrade.setString(2, teacher);
-        insertGrade.setString(3, subject);
-        insertGrade.setInt(4, grade);
+    public static ArrayList<String> getReqDocs(String categoryTitle) throws SQLException {
+        ArrayList<String> reqDocs = new ArrayList<>();
 
-        insertGrade.executeUpdate();
+        selectReqDocs.setString(1, categoryTitle);
+
+        ResultSet localResultSet = selectReqDocs.executeQuery();
+
+        while(localResultSet.next()) {
+            reqDocs.add(localResultSet.getString(1));
+        }
+
+        return reqDocs;
     }
 
-    public static void insertHomework(String className, String subject, String teacher, LocalDate deadline, String homeworkText) throws SQLException {
-        insertHomework.setString(1, className);
-        insertHomework.setString(2, subject);
-        insertHomework.setString(3, teacher);
-        insertHomework.setDate(4, Date.valueOf(deadline));
-        insertHomework.setString(5, homeworkText);
+    public static void insertRequest(String link, FACategory faCategory, String login) throws SQLException {
+        insertRequest.setString(1, link);
+        insertRequest.setString(2, login);
+        insertRequest.setString(3, faCategory.getTitle());
 
-        insertHomework.executeUpdate();
+        insertRequest.executeUpdate();
     }
 
-    public static void insertReproof(String student, String teacher, String reproofText) throws SQLException {
-        insertReproof.setString(1, student);
-        insertReproof.setString(2, teacher);
-        insertReproof.setString(3, reproofText);
+    public static String getReqDocsInString(String faCategory) throws SQLException {
+        StringBuilder reqDocs = new StringBuilder();
 
-        insertReproof.executeUpdate();
-    }
+        getReqDocs(faCategory).forEach(reqDoc -> reqDocs.append("-").append(reqDoc).append(";\n"));
 
-    public static String getStudentClass(String studentName) throws SQLException {
-        selectStudentClass.setString(1, studentName);
-
-        resultSet = selectStudentClass.executeQuery();
-        resultSet.next();
-
-        return resultSet.getString(1);
+        return reqDocs.toString();
     }
 }

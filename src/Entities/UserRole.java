@@ -1,4 +1,4 @@
-package Staff;
+package Entities;
 
 public enum UserRole {
 

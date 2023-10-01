@@ -1,8 +1,7 @@
 package Entities;
 
 
-import Staff.UserRole;
-import static Staff.UserRole.*;
+import static Entities.UserRole.*;
 
 public class User {
     private UserRole role;

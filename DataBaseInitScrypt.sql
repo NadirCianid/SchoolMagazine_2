@@ -2,7 +2,7 @@
 
 use financial_assistance;
 
-drop table FA_applications;
+drop table FA_requests;
 drop table required_documents_list;
 drop table students;
 drop table specialties;
@@ -45,13 +45,11 @@ CREATE UNIQUE INDEX UQ_students_mail ON students (mail);
 
 create table required_documents (
 id int primary key auto_increment,
-title varchar(100) not null,
 description varchar(500) not null);
 
-create table FA_categories (
+create table fa_categories (
 id int primary key auto_increment,
-title varchar(100) not null,
-description varchar(500) not null,
+title varchar(500) not null,
 payment_amount int not null);
 
 create table required_documents_list (
@@ -59,26 +57,30 @@ id int primary key auto_increment,
 required_document_id int not null,
 constraint required_document_fk foreign key (required_document_id)
 references required_documents (id), 
-FA_category_id int not null,
-constraint FA_category_fk foreign key (FA_category_id)
-references FA_categories (id)
+fa_category_id int not null,
+constraint fa_category_fk foreign key (fa_category_id)
+references fa_categories (id)
 );
 
-create table FA_applications (
+create table fa_requests (
 id int primary key auto_increment,
+filling_date date not null,
+response_date date,
 conf_doc_link varchar(200) not null,
-application_status varchar(50) not null,
-admin_coment varchar(500) not null,
-payment_amount int not null,
-admin_id int not null,
+request_status varchar(50) not null,
+admin_coment varchar(500) ,
+payment_amount int,
+admin_id int,
 constraint admin_fk foreign key (admin_id)
 references admins (id), 
 student_id int not null,
-constraint FA_student_fk foreign key (student_id)
+constraint fa_student_fk foreign key (student_id)
 references students (id), 
-FA_category_id int not null,
-constraint FA_cat_fk foreign key (FA_category_id)
-references FA_categories (id));
+fa_category_id int not null,
+constraint fa_cat_fk foreign key (fa_category_id)
+references fa_categories (id));
+
+CREATE UNIQUE INDEX UQ_request_student ON fa_requests (student_id, fa_category_id);
 
 
 insert into institutes (name) values ('ИКНК'), ('ИПМЭиТ'), ('Физ-мех');
@@ -105,23 +107,24 @@ insert into admins (name, mail, pswd)
 values ('Сергеев Сергей Сергеевич', 'sergeev@spbstu.ru', '1111'),
 ('Соколов Олег Олегович', 'sokolov.oo@sbpstu.ru', '1111');
 
-insert into required_documents (title, description)
-values ('Справки', 'Копии справок, выданных органами местного самоуправления'), 
-('Пояснительная записка', 'Сопроводительное письмо о чрезвычайном обстоятельстве'),
-('Свидетельстово смерти', 'Копия свидетельства о смерти члена Профсоюза, члена его семьи'),
-('Свидетельство о рождении', 'Свидетельство о рождении или копия решения суда об усыновлении'),
-('Документы, подтверждающие родство', 'свидетельство о рождении, смене фамилии, браке')  ;
+insert into required_documents (description)
+values ('Копии справок, выданных органами местного самоуправления'), 
+('Сопроводительное письмо о чрезвычайном обстоятельстве'),
+('Копия свидетельства о смерти члена Профсоюза, члена его семьи'),
+('Свидетельство о рождении или копия решения суда об усыновлении'),
+('Документы, подтверждающие родство (свидетельство о рождении, смене фамилии, браке)')  ;
 
-insert into FA_categories (title, description, payment_amount)
-values ('В связи с чрезвычайными обстоятельствами', 'Чрезвычайные могут быть разными, поэтому каждый случай рассматривается индивидуально.', 23700),
-('В случае смерти члена Профсоюза, члена его семьи ', 'Членами семьи считаются: родители, супруг(а) и дети', 23700),
-('В связи с рождением (усыновлением) ребенка', '-', 16000);
+insert into fa_categories (title, payment_amount)
+values ('В связи с чрезвычайными обстоятельствами', 23700),
+('В случае смерти члена Профсоюза, члена его семьи (родители, супруг(а) и дети)', 23700),
+('В связи с рождением (усыновлением) ребенка', 16000);
 
-insert into required_documents_list (required_document_id, FA_category_id) 
+insert into required_documents_list (required_document_id, fa_category_id) 
 values (2, 1),
 (1, 1),
 (5, 2),
-(3, 2);
+(3, 2),
+(4, 3);
 
 
 

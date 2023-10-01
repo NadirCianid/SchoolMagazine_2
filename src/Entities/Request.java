@@ -1,16 +1,34 @@
 package Entities;
 
+import Controllers.DataController;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+
 public class Request {
-    private User student;
+    private String studentName;
+    private String studentInstitute;
+    private String studentSpecialty;
     private String confDocLink;
     private String faCategory;
-    private String applicationStatus;
+    private String requestStatus;
+    private String fillingDate;
+    private String responseDate;
     private String adminComment;
-    private int paymentAmount;
+    private String paymentAmount;
     private User admin;
 
-    public User getStudent() {
-        return student;
+    public String getStudentName() {
+        return studentName;
+    }
+
+    public String getStudentInstitute() {
+        return studentInstitute;
+    }
+
+    public String getStudentSpecialty() {
+        return studentSpecialty;
     }
 
     public String getConfDocLink() {
@@ -21,15 +39,23 @@ public class Request {
         return faCategory;
     }
 
-    public String getApplicationStatus() {
-        return applicationStatus;
+    public String getRequestStatus() {
+        return requestStatus;
+    }
+
+    public String getFillingDate() {
+        return fillingDate;
+    }
+
+    public String getResponseDate() {
+        return responseDate;
     }
 
     public String getAdminComment() {
         return adminComment;
     }
 
-    public int getPaymentAmount() {
+    public String getPaymentAmount() {
         return paymentAmount;
     }
 
@@ -37,10 +63,25 @@ public class Request {
         return admin;
     }
 
-    public Request(User student, String confDocLink, String faCategory, int paymentAmount) {
-        this.student = student;
+
+    public Request(String confDocLink, String faCategory, String fillingDate) {
         this.confDocLink = confDocLink;
         this.faCategory = faCategory;
+        this.fillingDate = fillingDate;
+    }
+
+    public Request(String faCategory, String adminComment, String requestStatus, String fillingDate, String responseDate, String paymentAmount) {
+        this.faCategory = faCategory;
+        this.requestStatus = requestStatus;
+        this.fillingDate = fillingDate;
+        this.responseDate = responseDate;
+        this.adminComment = adminComment;
         this.paymentAmount = paymentAmount;
+    }
+
+    public void setStudentParams(String studentName, String studentInstitute, String studentSpecialty) {
+        this.studentName = studentName;
+        this.studentInstitute = studentInstitute;
+        this.studentSpecialty = studentSpecialty;
     }
 }

@@ -47,7 +47,7 @@ public class LogInController {
             toHomePageScene(event, fxmlLoader);
 
             //Инициализация сцены личного кабинета
-            ((HomePageController) fxmlLoader.getController()).init(login);
+            ((NewHomePageController) fxmlLoader.getController()).init();
         } else {
             JOptionPane.showMessageDialog(null, "Нет такого пользователя! \n" +
                     "Проверьте введеные данные.", " Ошибка", JOptionPane.ERROR_MESSAGE);

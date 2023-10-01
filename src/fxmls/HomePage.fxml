@@ -8,88 +8,92 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="720.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.HomePageController">
+<AnchorPane prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.NewHomePageController">
    <children>
-      <Label layoutX="32.0" layoutY="28.0" text="Материальная помощь для студентов">
+      <Label layoutX="271.0" layoutY="34.0" text="Материальная помощь для студентов">
          <font>
-            <Font size="24.0" />
+            <Font size="31.0" />
          </font>
       </Label>
-      <Label fx:id="userLabel" layoutX="274.0" layoutY="686.0" prefHeight="20.0" prefWidth="192.0" text="Студент/админ">
+      <Label fx:id="userLabel" alignment="CENTER_RIGHT" layoutX="784.0" layoutY="681.0" prefHeight="20.0" prefWidth="282.0" text="Студент/админ">
          <font>
-            <Font size="14.0" />
+            <Font size="16.0" />
          </font>
       </Label>
-      <Pane fx:id="adminPane" prefHeight="720.0" prefWidth="480.0" visible="false">
+      <Pane fx:id="adminPane" prefHeight="720.0" prefWidth="1080.0" visible="false">
          <children>
-            <TableView fx:id="adminTableView" layoutX="8.0" layoutY="281.0" prefHeight="318.0" prefWidth="465.0">
+            <TableView fx:id="adminTableView" layoutX="40.0" layoutY="224.0" prefHeight="376.0" prefWidth="1000.0">
               <columns>
-                <TableColumn fx:id="instituteTC" prefWidth="60.0" text="Институт" />
-                <TableColumn fx:id="specialtyTC" prefWidth="97.0" text="Группа" />
-                  <TableColumn fx:id="studentTC" prefWidth="125.0" text="Студент" />
-                  <TableColumn fx:id="faCategoryTC" prefWidth="182.0" text="Категория мат. помощи" />
+                  <TableColumn fx:id="faCategoryAdminTC" prefWidth="409.33337020874023" text="Категория мат. помощи" />
+                <TableColumn fx:id="instituteTC" prefWidth="116.2666015625" text="Институт" />
+                <TableColumn fx:id="specialtyTC" prefWidth="134.66668701171875" text="Группа" />
+                  <TableColumn fx:id="studentTC" prefWidth="185.86669921875" text="Студент" />
+                  <TableColumn fx:id="fillingDateAdminTC" prefWidth="160.533447265625" text="Дата подачи" />
               </columns>
             </TableView>
-            <Button layoutX="226.0" layoutY="625.0" mnemonicParsing="false" onAction="#openApplication" text="Рассмотреть выбранную заявку">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
-            <VBox layoutX="32.0" layoutY="119.0" prefHeight="150.0" prefWidth="417.0" spacing="10.0">
-               <children>
-                  <ToolBar prefHeight="40.0" prefWidth="200.0">
-                    <items>
-                        <ComboBox fx:id="instituteCB" prefHeight="25.0" prefWidth="177.0" promptText="Институт" />
-                      <Button mnemonicParsing="false" onAction="#filterByInstitute" text="По институту" />
-                    </items>
-                  </ToolBar>
-                  <ToolBar prefHeight="40.0" prefWidth="200.0">
-                     <items>
-                        <ComboBox fx:id="specialtyCB" prefHeight="25.0" prefWidth="177.0" promptText="Номер группы" />
-                        <Button mnemonicParsing="false" onAction="#filterBySpecialty" prefHeight="25.0" prefWidth="89.0" text="По группе" />
-                     </items>
-                  </ToolBar>
-                  <ToolBar prefHeight="40.0" prefWidth="200.0">
-                     <items>
-                        <ComboBox fx:id="categoryCB" prefHeight="25.0" prefWidth="178.0" promptText="Категория мат. помощи" />
-                        <Button mnemonicParsing="false" onAction="#filterByCategory" prefHeight="25.0" prefWidth="169.0" text="По категории мат. помощи" />
-                     </items>
-                  </ToolBar>
-               </children>
-            </VBox>
-            <Label layoutX="203.0" layoutY="89.0" text="Фильтр">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-         </children>
-      </Pane>
-      <Pane fx:id="studentPane" prefHeight="720.0" prefWidth="480.0" visible="false">
-         <children>
-            <TableView fx:id="studentTableView" layoutX="45.0" layoutY="173.0" prefHeight="431.0" prefWidth="390.0">
-              <columns>
-                <TableColumn fx:id="faCategoryStudentTC" prefWidth="75.0" text="Категория" />
-                <TableColumn fx:id="applicationStatusTC" prefWidth="53.0" text="Статус" />
-                  <TableColumn fx:id="comentTC" prefWidth="196.0" text="Комментарий" />
-                  <TableColumn fx:id="paymentTC" prefWidth="65.0" text="Выплата" />
-              </columns>
-            </TableView>
-            <Button layoutX="140.0" layoutY="628.0" mnemonicParsing="false" onAction="#sendApplication" text="Подать новую заявку">
+            <Button layoutX="397.0" layoutY="633.0" mnemonicParsing="false" onAction="#openRequest" text="Рассмотреть выбранную заявку">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Label layoutX="127.0" layoutY="130.0" text="Статус ваших заявок">
+            <HBox alignment="CENTER" disable="true" layoutX="45.0" layoutY="132.0" prefHeight="52.0" prefWidth="1000.0" spacing="10.0">
+               <children>
+                  <ToolBar prefHeight="40.0" prefWidth="215.0">
+                    <items>
+                        <ComboBox fx:id="instituteCB" prefHeight="25.0" prefWidth="102.0" promptText="Институт" />
+                      <Button mnemonicParsing="false" onAction="#filterByInstitute" text="По институту" />
+                    </items>
+                  </ToolBar>
+                  <ToolBar prefHeight="40.0" prefWidth="233.0">
+                     <items>
+                        <ComboBox fx:id="specialtyCB" prefHeight="25.0" prefWidth="126.0" promptText="Номер группы" />
+                        <Button mnemonicParsing="false" onAction="#filterBySpecialty" prefHeight="25.0" prefWidth="89.0" text="По группе" />
+                     </items>
+                  </ToolBar>
+                  <ToolBar prefHeight="40.0" prefWidth="371.0">
+                     <items>
+                        <ComboBox fx:id="categoryCB" prefHeight="25.0" prefWidth="177.0" promptText="Категория мат. помощи" />
+                        <Button mnemonicParsing="false" onAction="#filterByCategory" prefHeight="25.0" prefWidth="169.0" text="По категории мат. помощи" />
+                     </items>
+                  </ToolBar>
+               </children>
+            </HBox>
+            <Label layoutX="515.0" layoutY="105.0" text="Фильтр">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Separator layoutX="40.0" layoutY="194.0" prefHeight="20.0" prefWidth="1000.0" />
+         </children>
+      </Pane>
+      <Pane fx:id="studentPane" prefHeight="720.0" prefWidth="1080.0" visible="false">
+         <children>
+            <TableView fx:id="studentTableView" layoutX="40.0" layoutY="180.0" prefHeight="400.0" prefWidth="1000.0">
+              <columns>
+                <TableColumn fx:id="faCategoryStudentTC" prefWidth="209.0" text="Категория" />
+                <TableColumn fx:id="requestStatusTC" minWidth="0.0" prefWidth="120.0" text="Статус" />
+                  <TableColumn fx:id="fillingDateStudentTC" prefWidth="139.0" text="Дата подачи" />
+                  <TableColumn fx:id="responseDateTC" prefWidth="170.0" text="Дата вердикта" />
+                  <TableColumn fx:id="commentTC" minWidth="0.0" prefWidth="275.0" text="Комментарий" />
+                  <TableColumn fx:id="paymentTC" prefWidth="86.0" text="Выплата" />
+              </columns>
+            </TableView>
+            <Button layoutX="440.0" layoutY="619.0" mnemonicParsing="false" onAction="#sendRequest" text="Подать новую заявку">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Label layoutX="427.0" layoutY="129.0" text="Статус ваших заявок">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <Separator layoutY="81.0" prefHeight="20.0" prefWidth="480.0" />
          </children>
       </Pane>
+      <Separator layoutX="40.0" layoutY="80.0" prefHeight="20.0" prefWidth="1000.0" />
    </children>
 </AnchorPane>
