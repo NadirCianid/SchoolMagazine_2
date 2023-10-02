@@ -140,7 +140,10 @@ public class RequestPageController {
         faCategoryText.setText("Категория мат. помощи:" + "\n" +
                 selectedRequest.getFaCategory() + "\n\n"
                 + "Документы необходимые для получения данной категории мат. помощи: \n"
-                + DataController.getReqDocsInString(selectedRequest.getFaCategory()));
+                + DataController.getReqDocsInString(selectedRequest.getFaCategory())
+                + "\n\n"
+                + "Имя студента: \n"
+                + selectedRequest.getStudentName());
 
         ObservableList<String> statuses = FXCollections.observableArrayList();
         statuses.add("На дополнительном рассмотрении");

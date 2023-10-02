@@ -19,7 +19,7 @@
             <Font size="31.0" />
          </font>
       </Label>
-      <Label fx:id="userLabel" alignment="CENTER_RIGHT" layoutX="784.0" layoutY="681.0" prefHeight="20.0" prefWidth="282.0" text="Студент/админ">
+      <Label fx:id="userLabel" alignment="CENTER_RIGHT" layoutX="636.0" layoutY="681.0" prefHeight="25.0" prefWidth="430.0" text="Студент/админ">
          <font>
             <Font size="16.0" />
          </font>

@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="45300683-648f-47db-937a-eacff8028b5f" name="Changes" comment="Database updated. Code refactored for new tasks.">
+    <list default="true" id="45300683-648f-47db-937a-eacff8028b5f" name="Changes" comment="Допилил">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/DataController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/DataController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controllers/RequestPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/RequestPageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entities/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/Request.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxmls/HomePage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxmls/HomePage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxmls/RequestPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxmls/RequestPage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Тестирование.docx" beforeDir="false" afterPath="$PROJECT_DIR$/Тестирование.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/план.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,27 +45,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Program Files/MySQL/mysql-connector-j-8.0.33/mysql-connector-j-8.0.33.jar",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pathVariables"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Program Files/MySQL/mysql-connector-j-8.0.33/mysql-connector-j-8.0.33.jar&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pathVariables&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ],
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "GitIgnore"
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;GitIgnore&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="Staff" />
@@ -99,6 +101,12 @@
       <item itemvalue="Application.App" />
       <item itemvalue="Application.Test" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Test" />
+        <item itemvalue="Application.Test" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -215,7 +223,21 @@
       <option name="project" value="LOCAL" />
       <updated>1696182014986</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Добавлен план тестирования">
+      <created>1696233885438</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1696233885438</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Добавлена новая проверка (на добавление дубликатов заявок)">
+      <created>1696249916065</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1696249916065</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -260,7 +282,10 @@
     <MESSAGE value=".gitignore changed" />
     <MESSAGE value="Changed interface and data base + began to change controllers." />
     <MESSAGE value="Database updated. Code refactored for new tasks." />
-    <option name="LAST_COMMIT_MESSAGE" value="Database updated. Code refactored for new tasks." />
+    <MESSAGE value="Добавлен план тестирования" />
+    <MESSAGE value="Добавлена новая проверка (на добавление дубликатов заявок)" />
+    <MESSAGE value="Допилил" />
+    <option name="LAST_COMMIT_MESSAGE" value="Допилил" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -18,7 +18,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.RequestPageController">
    <children>
-      <Pane fx:id="adminPane" prefHeight="720.0" prefWidth="1080.0">
+      <Pane fx:id="adminPane" prefHeight="720.0" prefWidth="1080.0" visible="false">
          <children>
             <Label layoutX="393.0" layoutY="100.0" text="Рассмотрение заявки студента">
                <font>
@@ -57,7 +57,7 @@
             <ComboBox fx:id="statusComboBox" layoutX="454.0" layoutY="599.0" prefHeight="25.0" prefWidth="135.0" promptText="Статус" />
          </children>
       </Pane>
-      <Pane fx:id="studentPane" prefHeight="720.0" prefWidth="1080.0" visible="false">
+      <Pane fx:id="studentPane" prefHeight="720.0" prefWidth="1080.0">
          <children>
             <Label layoutX="319.0" layoutY="26.0" text="Подача заявки на материальную помощь">
                <font>
@@ -66,9 +66,9 @@
             </Label>
             <TableView fx:id="faCategoriesTableView" layoutX="40.0" layoutY="80.0" prefHeight="400.0" prefWidth="1000.0">
               <columns>
-                <TableColumn fx:id="categoryTC" prefWidth="329.0" text="Категория" />
-                <TableColumn fx:id="reqDocsTC" prefWidth="544.0" text="Необходимые документы" />
-                  <TableColumn fx:id="paymentAmountTC" prefWidth="126.0" text="Размер выплаты" />
+                <TableColumn fx:id="categoryTC" prefWidth="329.0" sortable="false" text="Категория" />
+                <TableColumn fx:id="reqDocsTC" prefWidth="544.0" sortable="false" text="Необходимые документы" />
+                  <TableColumn fx:id="paymentAmountTC" prefWidth="126.0" sortable="false" text="Размер выплаты" />
               </columns>
             </TableView>
             <TextField fx:id="confDocsLink" layoutX="297.0" layoutY="593.0" prefHeight="25.0" prefWidth="487.0" promptText="Ссылка на облачное хранилище" />
