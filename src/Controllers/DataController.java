@@ -4,6 +4,7 @@ import Entities.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import javax.swing.*;
 import java.sql.*;
 import java.sql.Date;
 import java.time.format.DateTimeFormatter;
@@ -230,7 +231,13 @@ public class DataController {
         insertRequest.setString(2, login);
         insertRequest.setString(3, faCategory.getTitle());
 
-        insertRequest.executeUpdate();
+        try {
+            insertRequest.executeUpdate();
+        } catch (SQLIntegrityConstraintViolationException e) {
+            JOptionPane.showMessageDialog(null, "Ошибка добавления заявки\n" +
+                    "Вы не можете создать несколько заявок в одной категории.", " Ошибка", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
     }
 
     public static String getReqDocsInString(String faCategory) throws SQLException {
